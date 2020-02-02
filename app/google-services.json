@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "838947232692",
+    "firebase_url": "https://faculty-dashboard-fd.firebaseio.com",
+    "project_id": "faculty-dashboard-fd",
+    "storage_bucket": "faculty-dashboard-fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838947232692:android:0e4f3fe10d61d83bbef0e1",
+        "android_client_info": {
+          "package_name": "in.thelordtech.facultydashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838947232692-tlp10j959vjlubj4ckau262pb3g9ohsg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.thelordtech.facultydashboard",
+            "certificate_hash": "ad205db27e5a97003ef79b35022ab4817e3598e8"
+          }
+        },
+        {
+          "client_id": "838947232692-dln2279757d2aj7ibu5fd904m23f0969.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpOa2mk94hHHHtcJESl_WzD9rSZRNDItE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838947232692-dln2279757d2aj7ibu5fd904m23f0969.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
