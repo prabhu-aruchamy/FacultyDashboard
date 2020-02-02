@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
             android:padding="12dp"
-            android:hint="Edit Video Title"
+            android:hint="Edit Title"
             android:singleLine="true"
 
             />
@@ -92,7 +92,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text_border"
             android:gravity="top|left"
-            android:hint="Type Your video Description here..."
+            android:hint="Edit / Update Notes ..."
             android:inputType="textMultiLine"
             android:layout_marginTop="10dp"
             android:lines="25"
