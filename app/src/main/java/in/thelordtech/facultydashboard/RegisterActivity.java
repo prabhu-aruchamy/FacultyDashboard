@@ -4,12 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,9 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import in.thelordtech.facultydashboard.helpers.Utils;
 
@@ -45,36 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.userpassword);
         cpassword = findViewById(R.id.cpassword);
         registerBtn = findViewById(R.id.registerbtn);
-        typeSpinner = findViewById(R.id.type);
         firebaseAuth = FirebaseAuth.getInstance();
-
-        List<String> list = new ArrayList<>();
-        list.add("Student");
-        list.add("Faculty");
-        list.add("Which kind are you?");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item) {
-            @Override
-            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-
-                View v = super.getView(position, convertView, parent);
-                if (position == getCount()) {
-                    ((TextView) v.findViewById(android.R.id.text1)).setText("");
-                    ((TextView) v.findViewById(android.R.id.text1)).setHint(getItem(getCount()));
-                }
-
-                return v;
-            }
-
-            @Override
-            public int getCount() {
-                return super.getCount() - 1;
-            }
-
-        };
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.addAll(list);
-        typeSpinner.setAdapter(adapter);
-        typeSpinner.setSelection(adapter.getCount());
 
         progressDialog = new ProgressDialog(RegisterActivity.this);
 

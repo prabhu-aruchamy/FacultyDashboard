@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.securepreferences.SecurePreferences;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
     SecurePreferences pref;
+    FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                                 .putString("email",userEmail)
                                 .putString("password",Password)
                                 .apply();
+                        //mFirebaseAnalytics.setUserProperty("UserData", userEmail+" : "+Password);
                         openHome();
                     }else{
                         FirebaseAuth.getInstance().signOut();

@@ -222,9 +222,15 @@ public class NotesListActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(NotesListActivity.this, "Please Connect to Internet", Toast.LENGTH_SHORT).show();
                 }
+                break;
+
+            case R.id.share_note:
+                Toast.makeText(this, "Share Note", Toast.LENGTH_SHORT).show();
+                break;
 
             default: return super.onContextItemSelected(item);
         }
+        return super.onContextItemSelected(item);
     }
 
     private void deletenoteonMenuClick(String noteID) {
