@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +27,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerBtn;
     FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
-    private Spinner typeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

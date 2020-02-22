@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:ignore="UnusedAttribute"
+    android:layout_height="match_parent"
+    tools:context=".FacultyProfileActivity"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chooseImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/edit_profile_icon"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/facultyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Name of the Faculty"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/facultyEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="prabhu@thelordtech.in"
+        android:layout_gravity="center"
+        android:textSize="18dp"
+        android:layout_marginBottom="2dp"/>
+
+    <TextView
+        android:id="@+id/facultyNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7539922245"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:textColor="@color/red"/>
+
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:id="@+id/flabel1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <EditText
+            android:id="@+id/Bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/facultyprofileedittext"
+            android:hint="Bio"
+            android:maxLines="4"
+            android:maxHeight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginBottom="4dp"
+            android:padding="15dp"/>
+
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:id="@+id/flabel2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+>
+
+        <EditText
+            android:id="@+id/education"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/facultyprofileedittext"
+            android:hint="Education"
+            android:maxHeight="10dp"
+            android:maxLines="4"
+            android:padding="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="textStart" />
+
+
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+
+
+
+
+
+
+    <Button
+        android:id="@+id/registerbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:text="Update"/>
+
+
+
+
+</LinearLayout>

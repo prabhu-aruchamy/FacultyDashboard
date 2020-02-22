@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
+import in.thelordtech.facultydashboard.FacultyProfileActivity;
 import in.thelordtech.facultydashboard.NotesListActivity;
 import in.thelordtech.facultydashboard.R;
 import in.thelordtech.facultydashboard.RequestAppointmentActivity;
@@ -38,6 +39,14 @@ public class HomeFragment extends Fragment {
         myNotes = root.findViewById(R.id.myNotes);
         welcome.setText(String.format("Welcome %s", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName()+"!"));
 
+
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), FacultyProfileActivity.class);
+                startActivity(i);
+            }
+        });
 
         myNotes.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -48,7 +48,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void ResetPassword(String userEmail) {
 
-
         mFirebaseAuth.sendPasswordResetEmail(userEmail)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
