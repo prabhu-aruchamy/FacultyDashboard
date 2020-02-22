@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.thelordtech.facultydashboard">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FacultyProfileActivity"></activity>
+        <activity android:name=".EditFacultyProfile"></activity>
+        <activity android:name=".FacultyProfileActivity" />
         <activity android:name=".ViewNoteActivity" />
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".NotesListActivity" />
