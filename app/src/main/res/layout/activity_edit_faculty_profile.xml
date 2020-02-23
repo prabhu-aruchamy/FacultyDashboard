@@ -99,61 +99,85 @@
                 </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
                 <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                    android:id="@+id/flabel2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp">
 
                     <EditText
                         android:id="@+id/editFacultyBIO"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:hint="Bio"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="BIO"
                         android:inputType="textMultiLine"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:maxLines="5"/>
+                        android:maxLength="500"
+                        android:maxLines="5"
+                        android:minHeight="20dp"
 
-
+                        />
                 </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
                 <com.wrapp.floatlabelededittext.FloatLabeledEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp">
 
                     <EditText
                         android:id="@+id/editFacultyEducation"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:hint="Educational Details"
                         android:inputType="textMultiLine"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:maxLines="5" />
+                        android:maxLength="500"
+                        android:maxLines="5"
+                        android:minHeight="20dp" />
+                </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
+                <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
+                    <EditText
+                        android:id="@+id/facultyProjects"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="Projects"
+                        android:inputType="textMultiLine"
+                        android:maxLength="500"
+                        android:maxLines="5"
+                        android:minHeight="20dp" />
+                </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+                <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <EditText
+                        android:id="@+id/uploadResume"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="Resume Link"
+                        android:inputType="textMultiLine"
+                        android:maxLength="500"
+                        android:maxLines="5"
+                        android:minHeight="20dp" />
                 </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
 
-                <TextView
-                    android:id="@+id/uploadResume"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+ Upload Resume"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:textStyle="bold"
-                    android:textColor="#FF0000"
-                    android:maxLines="1"/>
+
 
                 <Button
                     android:id="@+id/UpdateProfile"

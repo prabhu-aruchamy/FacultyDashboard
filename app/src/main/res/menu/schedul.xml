@@ -6,13 +6,10 @@
         android:title="Add Note" />
     <item
         android:id="@+id/view_hist"
-        android:title="Past events"
-
-        />
+        android:title="Past events" />
 
     <item android:id="@+id/refres"
         android:icon="@drawable/refresh"
         app:showAsAction="always"
         android:title="Refresh" />
-    />
 </menu>

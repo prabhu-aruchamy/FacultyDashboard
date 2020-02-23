@@ -2,12 +2,14 @@ package in.thelordtech.facultydashboard;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +34,13 @@ public class FacultyProfileActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     CircleImageView icon;
     Uri mImageUri;
-    TextView facultyEmail, facultyNumber, facultyName, bioFaculty, educationFaculty ;
+    TextView facultyEmail, facultyNumber, facultyName, bioFaculty, educationFaculty, facultproj ;
     FirebaseAuth fAuth;
     DatabaseReference facultyDBref;
     private ProgressDialog progressDialog;
     String ProfileIconURL = "";
+    String fproject = "";
+    Button DownloadResume;
 
     private String phoneNumber, facultyBIO, facultyIconURL, isProfileUpdated, resumeDownloadLink, facultyEducationalDetails;
 
@@ -51,6 +55,8 @@ public class FacultyProfileActivity extends AppCompatActivity {
         facultyNumber = findViewById(R.id.facultyNumber);
         bioFaculty = findViewById(R.id.facultyBIO);
         educationFaculty = findViewById(R.id.facultyEducation);
+        facultproj = findViewById(R.id.facultproj);
+        DownloadResume = findViewById(R.id.DownloadResume);
 
         progressDialog = new ProgressDialog(FacultyProfileActivity.this);
         progressDialog.setMessage("Fetching Details...");
@@ -85,12 +91,21 @@ public class FacultyProfileActivity extends AppCompatActivity {
                             facultyBIO = String.valueOf(ds.child("Bio").getValue());
                             facultyEducationalDetails = String.valueOf(ds.child("EducationalDetails").getValue());
                             facultyIconURL = String.valueOf(ds.child("IconURL").getValue());
+                            fproject = String.valueOf(ds.child("Projects").getValue());
                             Picasso.get().load(facultyIconURL).into(icon);
                             resumeDownloadLink = String.valueOf(ds.child("ResumeDownloadLink").getValue());
 
+                            if(resumeDownloadLink.equals("NU") || resumeDownloadLink.equals("")){
+                                DownloadResume.setEnabled(false);
+                                DownloadResume.setBackgroundColor(Color.GRAY);
+                                DownloadResume.setText("Resume Not Updated");
+                            }
+
                             facultyNumber.setText(phoneNumber);
                             bioFaculty.setText(facultyBIO);
+                            facultproj.setText(fproject);
                             educationFaculty.setText(facultyEducationalDetails);
+
 
                             progressDialog.dismiss();
 
@@ -106,6 +121,18 @@ public class FacultyProfileActivity extends AppCompatActivity {
             }
         });
 
+
+        DownloadResume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(FacultyProfileActivity.this, resumeDownloadLink, Toast.LENGTH_SHORT).show();
+
+                String url = resumeDownloadLink;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
 
         facultyEmail.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +156,8 @@ public class FacultyProfileActivity extends AppCompatActivity {
                 i.putExtra("Contact",facultyNumber.getText().toString());
                 i.putExtra("BIO",bioFaculty.getText().toString());
                 i.putExtra("Education",educationFaculty.getText().toString());
+                i.putExtra("Projects",facultproj.getText().toString());
+                i.putExtra("ResumeLink",resumeDownloadLink);
                 i.putExtra("IconURL",facultyIconURL);
                 startActivity(i);
                 //OpenGalleryToPickImage();
@@ -195,6 +224,8 @@ public class FacultyProfileActivity extends AppCompatActivity {
             editProfile.putExtra("Contact",facultyNumber.getText().toString());
             editProfile.putExtra("BIO",bioFaculty.getText().toString());
             editProfile.putExtra("Education",educationFaculty.getText().toString());
+            editProfile.putExtra("Projects",facultproj.getText().toString());
+            editProfile.putExtra("ResumeLink",resumeDownloadLink);
             editProfile.putExtra("IconURL",facultyIconURL);
             startActivity(editProfile);
         }

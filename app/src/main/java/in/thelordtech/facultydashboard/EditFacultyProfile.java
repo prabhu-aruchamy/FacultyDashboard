@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,9 +32,11 @@ import in.thelordtech.facultydashboard.helpers.Utils;
 public class EditFacultyProfile extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int PICK_DOCUMENT_REQUEST = 2;
+
     CircleImageView fImage;
-    EditText editNumber, editBio, editEducation,fName, fEmail;
-    TextView uploadResume;
+    EditText editNumber, editBio, editEducation,fName, fEmail,fprojects;
+    EditText uploadResume;
     Button updateProifle;
     FirebaseAuth firebaseAuth;
     private Uri mImageUri;
@@ -43,6 +44,8 @@ public class EditFacultyProfile extends AppCompatActivity {
     private StorageReference mStorageRef;
     String DownloadableIconLink;
     DatabaseReference updateFacultyProfile;
+    Uri mDocumentURI;
+
 
 
 
@@ -63,6 +66,7 @@ public class EditFacultyProfile extends AppCompatActivity {
         editEducation = findViewById(R.id.editFacultyEducation);
         uploadResume = findViewById(R.id.uploadResume);
         updateProifle = findViewById(R.id.UpdateProfile);
+        fprojects = findViewById(R.id.facultyProjects);
 
         if((getIntent().getStringExtra("Contact") != null) && (getIntent().getStringExtra("BIO") != null && (getIntent().getStringExtra("Education")!=null))){
 
@@ -70,9 +74,11 @@ public class EditFacultyProfile extends AppCompatActivity {
             editBio.setText(getIntent().getStringExtra("BIO"));
             editEducation.setText(getIntent().getStringExtra("Education"));
             editNumber.setText(getIntent().getStringExtra("Contact"));
-            ProfileIconFlag = 1;
+            fprojects.setText(getIntent().getStringExtra("Projects"));
+            uploadResume.setText(getIntent().getStringExtra("ResumeLink"));
             mImageUri = Uri.parse(getIntent().getStringExtra("IconURL"));
 
+            ProfileIconFlag = 2;
         }
 
         progressDialog = new ProgressDialog(EditFacultyProfile.this);
@@ -94,7 +100,7 @@ public class EditFacultyProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(editNumber.getText().toString().isEmpty() || editBio.getText().toString().isEmpty() || editEducation.getText().toString().isEmpty()){
+                if(editNumber.getText().toString().isEmpty() || editBio.getText().toString().isEmpty() || editEducation.getText().toString().isEmpty() || uploadResume.getText().toString().isEmpty() || fprojects.getText().toString().isEmpty()){
                     Toast.makeText(EditFacultyProfile.this, "Enter All Fields!", Toast.LENGTH_SHORT).show();
                 }else if(editNumber.getText().toString().length()<10){
                     Toast.makeText(EditFacultyProfile.this, "Phone Number Must be 10 digits!", Toast.LENGTH_SHORT).show();
@@ -103,16 +109,45 @@ public class EditFacultyProfile extends AppCompatActivity {
                 }else{
                     UpdateProfile(editNumber.getText().toString(), editBio.getText().toString(), editEducation.getText().toString());
                 }
-
             }
         });
+
     }
+
+
 
     private void UpdateProfile(String number, String bio, String education){
-        uploadIcon(number, bio, education);
+        if(ProfileIconFlag == 1) {
+            uploadIconandUserDetails(number, bio, education);
+        }else if(ProfileIconFlag == 2){
+            updateDetails();
+        }
     }
 
-    private void uploadIcon(final String Number, final String Bio, final String Education) {
+    private void updateDetails() {
+
+        updateFacultyProfile = FirebaseDatabase.getInstance().getReference("userProfile");
+
+        Map updatedProfile = new HashMap<>();
+
+        updatedProfile.put("ContactNumber", editNumber.getText().toString());
+        updatedProfile.put("Bio", editBio.getText().toString());
+        updatedProfile.put("EducationalDetails", editEducation.getText().toString());
+        updatedProfile.put("Projects",fprojects.getText().toString());
+        updatedProfile.put("ResumeDownloadLink",uploadResume.getText().toString());
+        updatedProfile.put("isProfileUpdatedFully","1");
+
+        updateFacultyProfile.child(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid()).updateChildren(updatedProfile);
+
+        Toast.makeText(this, "Intent: Profile Updated!", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(EditFacultyProfile.this, FacultyProfileActivity.class);
+        startActivity(i);
+        finish();
+
+
+    }
+
+    private void uploadIconandUserDetails(final String Number, final String Bio, final String Education) {
         if (firebaseAuth.getCurrentUser() != null) {
             progressDialog.show();
 
@@ -166,6 +201,8 @@ public class EditFacultyProfile extends AppCompatActivity {
         updatedProfile.put("Bio",bio);
         updatedProfile.put("EducationalDetails",education);
         updatedProfile.put("IconURL",downloadableIconLink);
+        updatedProfile.put("ResumeDownloadLink",uploadResume.getText().toString());
+        updatedProfile.put("Projects",fprojects.getText().toString());
         updatedProfile.put("isProfileUpdatedFully","1");
 
         updateFacultyProfile.child(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid()).updateChildren(updatedProfile);
@@ -194,7 +231,12 @@ public class EditFacultyProfile extends AppCompatActivity {
 
             Picasso.get().load(mImageUri).into(fImage);
             ProfileIconFlag = 1;
-
         }
+//        else if(requestCode == PICK_DOCUMENT_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+//            mDocumentURI = data.getData();
+//            Toast.makeText(this, "IN", Toast.LENGTH_SHORT).show();
+//
+//            uploadResume.setText((CharSequence) data);
+//        }
     }
 }

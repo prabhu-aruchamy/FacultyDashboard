@@ -120,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
                 notemap.put("ProfileID", firebaseAuth.getCurrentUser().getUid());
                 notemap.put("ResumeDownloadLink","NU");
                 notemap.put("EducationalDetails","NU");
+                notemap.put("Projects", "NU");
                 notemap.put("Bio","NU");
                 notemap.put("CurrentDesignation", "NU");
                 notemap.put("IconURL", "NU");
