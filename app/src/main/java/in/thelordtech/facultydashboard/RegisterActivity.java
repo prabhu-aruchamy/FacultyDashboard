@@ -123,6 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                 notemap.put("Bio","NU");
                 notemap.put("CurrentDesignation", "NU");
                 notemap.put("IconURL", "NU");
+                notemap.put("TimeTable", "https://firebasestorage.googleapis.com/v0/b/faculty-dashboard-fd.appspot.com/o/Faculty%20TimeTable%2Ftimetable.jpg?alt=media&token=22d47f5a-e785-4ef2-af45-cbcdc9a7d4ff");
                 notemap.put("ContactNumber", "75399xxx45");
 
                 profileDataBaseRef.setValue(notemap).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -20,7 +20,8 @@ import java.util.Objects;
 import in.thelordtech.facultydashboard.FacultyProfileActivity;
 import in.thelordtech.facultydashboard.NotesListActivity;
 import in.thelordtech.facultydashboard.R;
-import in.thelordtech.facultydashboard.RequestAppointmentActivity;
+import in.thelordtech.facultydashboard.TimeTableActivity;
+import in.thelordtech.facultydashboard.ViewSchedule;
 
 public class HomeFragment extends Fragment {
 
@@ -59,7 +60,15 @@ public class HomeFragment extends Fragment {
         myAppointments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), RequestAppointmentActivity.class);
+                Intent i = new Intent(getActivity(), ViewSchedule.class);
+                startActivity(i);
+            }
+        });
+
+        myTimeTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), TimeTableActivity.class);
                 startActivity(i);
             }
         });

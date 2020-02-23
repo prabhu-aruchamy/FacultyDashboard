@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditFacultyProfile"></activity>
+        <activity android:name=".History"></activity>
+        <activity android:name=".ExistSchedule" />
+        <activity android:name=".ViewSchedule" />
+        <activity android:name=".TimeTableActivity" />
+        <activity android:name=".EditFacultyProfile" />
         <activity android:name=".FacultyProfileActivity" />
         <activity android:name=".ViewNoteActivity" />
         <activity android:name=".AddNoteActivity" />

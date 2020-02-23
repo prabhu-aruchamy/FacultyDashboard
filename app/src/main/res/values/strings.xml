@@ -30,4 +30,7 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="hh_mm1">Enter the starting time of the appointment</string>
+    <string name="hi_mm">Enter the ending time of the appointment</string>
 </resources>
