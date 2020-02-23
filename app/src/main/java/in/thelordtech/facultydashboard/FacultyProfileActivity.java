@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class FacultyProfileActivity extends AppCompatActivity {
     String ProfileIconURL = "";
     String fproject = "";
     Button DownloadResume;
+    LinearLayout UI_Container;
 
     private String phoneNumber, facultyBIO, facultyIconURL, isProfileUpdated, resumeDownloadLink, facultyEducationalDetails;
 
@@ -49,6 +51,8 @@ public class FacultyProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_profile);
 
+        UI_Container = (LinearLayout)findViewById(R.id.UI_Container);
+        UI_Container.setVisibility(View.GONE);
         icon = findViewById(R.id.chooseImage);
         facultyName = findViewById(R.id.facultyName);
         facultyEmail = findViewById(R.id.facultyEmail);
@@ -87,15 +91,16 @@ public class FacultyProfileActivity extends AppCompatActivity {
                             finish();
                         }else {
                             //Toast.makeText(FacultyProfileActivity.this, ds.toString(), Toast.LENGTH_SHORT).show();
+                            UI_Container.setVisibility(View.VISIBLE);
                             phoneNumber = String.valueOf(ds.child("ContactNumber").getValue());
                             facultyBIO = String.valueOf(ds.child("Bio").getValue());
                             facultyEducationalDetails = String.valueOf(ds.child("EducationalDetails").getValue());
                             facultyIconURL = String.valueOf(ds.child("IconURL").getValue());
                             fproject = String.valueOf(ds.child("Projects").getValue());
-                            Picasso.get().load(facultyIconURL).into(icon);
+                            Picasso.get().load(facultyIconURL).into(icon); //Load Faculty Icon into Image View
                             resumeDownloadLink = String.valueOf(ds.child("ResumeDownloadLink").getValue());
 
-                            if(resumeDownloadLink.equals("NU") || resumeDownloadLink.equals("")){
+                            if(resumeDownloadLink.equals("NU") || resumeDownloadLink.equals("")){ //If resume link is not given
                                 DownloadResume.setEnabled(false);
                                 DownloadResume.setBackgroundColor(Color.GRAY);
                                 DownloadResume.setText("Resume Not Updated");
@@ -105,7 +110,6 @@ public class FacultyProfileActivity extends AppCompatActivity {
                             bioFaculty.setText(facultyBIO);
                             facultproj.setText(fproject);
                             educationFaculty.setText(facultyEducationalDetails);
-
 
                             progressDialog.dismiss();
 
@@ -191,23 +195,6 @@ public class FacultyProfileActivity extends AppCompatActivity {
 
     }
 
-    private void OpenGalleryToPickImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
-            mImageUri = data.getData();
-
-            Picasso.get().load(mImageUri).into(icon);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
