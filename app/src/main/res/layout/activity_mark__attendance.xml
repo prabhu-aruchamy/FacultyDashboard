@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Mark_Attendance"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvstudentname"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="30dp"
+            android:text=""
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/tvstudentid"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="30dp"
+            android:text=""
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textAllCaps="true" />
+
+        <RadioGroup
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/rg"
+            >
+            <RadioButton
+                android:id="@+id/rbpresent"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="30dp"
+                android:text = "Present"
+                android:padding="30dp"/>
+
+            <RadioButton
+                android:id="@+id/rbabsent"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="30dp"
+                android:text = "Absent"
+                android:padding="30dp"/>
+
+
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:text="Update"
+            android:textSize="30dp"
+            android:textColor="#EEEEEE"
+            android:background="#111111"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:textAllCaps="false"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

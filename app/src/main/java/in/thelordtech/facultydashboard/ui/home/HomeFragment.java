@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
+import in.thelordtech.facultydashboard.CourseListActivity;
 import in.thelordtech.facultydashboard.FacultyProfileActivity;
 import in.thelordtech.facultydashboard.NotesListActivity;
 import in.thelordtech.facultydashboard.R;
@@ -25,7 +26,7 @@ import in.thelordtech.facultydashboard.ViewSchedule;
 
 public class HomeFragment extends Fragment {
 
-    private Button myProfile,myTimeTable,myNotes,myAppointments;
+    private Button myProfile,myTimeTable,myNotes,myAppointments, courseDetails;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment {
         myAppointments = root.findViewById(R.id.myAppointments);
         myTimeTable = root.findViewById(R.id.myTimeTable);
         myNotes = root.findViewById(R.id.myNotes);
+        courseDetails = root.findViewById(R.id.courseDetails);
         welcome.setText(String.format("Welcome %s", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName()+"!"));
 
 
@@ -69,6 +71,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), TimeTableActivity.class);
+                startActivity(i);
+            }
+        });
+
+        courseDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), CourseListActivity.class);
                 startActivity(i);
             }
         });
