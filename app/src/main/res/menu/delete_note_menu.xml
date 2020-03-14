@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/fav_note"
-        android:title="Add to Favorites"/>
+        android:title="Add to Important"/>
 
     <item
         android:id="@+id/delete_menu"

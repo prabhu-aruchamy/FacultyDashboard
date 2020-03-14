@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/rem_fav_note"
-        android:title="Remove From Favorites"/>
+        android:title="Remove From Important"/>
 
     <item
         android:id="@+id/delete_menu"
