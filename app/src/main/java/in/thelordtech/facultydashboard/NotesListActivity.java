@@ -148,7 +148,6 @@ public class NotesListActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
