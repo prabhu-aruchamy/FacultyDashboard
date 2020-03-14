@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -62,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         updateRef = FirebaseDatabase.getInstance().getReference("Update");
+        checkUpdates();
     }
 
     @Override
@@ -101,9 +103,33 @@ public class HomeActivity extends AppCompatActivity {
                 if(isUpdateAvaliable.equals("1") && !(versionName.equals(availableVersion))){
                     showAlertDialog("App Update Available!", "What's New\n\n"+whatsNew, "Update", "Later");
                 }else {
-                    showAlertDialog("No Update Avaliable!","Your App is Up to Date😊😊","Close","");
+                    showAlertDialog("No Update Avaliable!","Chill!! Your App is Up to Date😊😊","Close","");
                 }
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(HomeActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private void checkUpdates() {
+
+        updateRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String isUpdateAvaliable = String.valueOf(dataSnapshot.child("isUpdateAvailable").getValue());
+                String availableVersion = String.valueOf(dataSnapshot.child("Version").getValue());
+                whatsNew = String.valueOf(dataSnapshot.child("WhatsNew").getValue());
+                String versionName = BuildConfig.VERSION_NAME;
+
+                if(isUpdateAvaliable.equals("1") && !(versionName.equals(availableVersion))){
+                    showAlertDialog("App Update Available!", "What's New\n\n"+whatsNew, "Update", "Later");
+                }
             }
 
             @Override
@@ -111,6 +137,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void showAlertDialog(String aTitle, String msg, final String pBtn, String nBtn) {
