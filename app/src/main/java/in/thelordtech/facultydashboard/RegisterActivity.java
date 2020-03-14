@@ -135,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             progressDialog.dismiss();
                             FirebaseAuth.getInstance().signOut();
-                            Utils.showToast(RegisterActivity.this,"User Registration Successful!\nVerify your Email!");
+                            Utils.showToast(RegisterActivity.this,"Registration Successful!\nVerify your Email!");
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();

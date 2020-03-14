@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/share_note"
         android:title="Share"/>
 
     <item
-        android:id="@+id/fav_note"
-        android:title="Add to Favorites"/>
+        android:id="@+id/rem_fav_note"
+        android:title="Remove From Favorites"/>
 
     <item
         android:id="@+id/delete_menu"
         android:icon="@drawable/delete_icon_menu"
         android:title="Delete" />
+
+
 
 </menu>

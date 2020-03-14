@@ -114,6 +114,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 notemap.put("Title", title);
                 notemap.put("Content", notes);
                 notemap.put("Noteid",newNoteref.getKey());
+                notemap.put("isImportant", "0");
                 notemap.put("timestamp", ServerValue.TIMESTAMP);
 
                 Thread makeThread = new Thread(new Runnable() {

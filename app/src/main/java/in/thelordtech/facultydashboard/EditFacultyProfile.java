@@ -45,10 +45,6 @@ public class EditFacultyProfile extends AppCompatActivity {
     String DownloadableIconLink;
     DatabaseReference updateFacultyProfile;
     Uri mDocumentURI;
-
-
-
-
     private ProgressDialog progressDialog;
 
     @Override
@@ -232,11 +228,5 @@ public class EditFacultyProfile extends AppCompatActivity {
             Picasso.get().load(mImageUri).into(fImage);
             ProfileIconFlag = 1;
         }
-//        else if(requestCode == PICK_DOCUMENT_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
-//            mDocumentURI = data.getData();
-//            Toast.makeText(this, "IN", Toast.LENGTH_SHORT).show();
-//
-//            uploadResume.setText((CharSequence) data);
-//        }
     }
 }

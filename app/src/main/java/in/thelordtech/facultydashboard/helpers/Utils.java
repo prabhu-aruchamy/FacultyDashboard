@@ -3,6 +3,8 @@ package in.thelordtech.facultydashboard.helpers;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
@@ -37,5 +39,14 @@ public class Utils {
 
     public static void showToast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+    }
+
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = null;
+        if (connManager != null) {
+            networkInfo = connManager.getActiveNetworkInfo();
+        }
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

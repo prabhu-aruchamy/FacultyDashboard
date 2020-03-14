@@ -69,4 +69,9 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
+
+    public void openImpNotesActivity(MenuItem item) {
+
+        startActivity(new Intent(this, StarNotesActivity.class));
+    }
 }

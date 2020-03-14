@@ -21,6 +21,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,10 +44,10 @@ public class NotesListActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private TextView content;
     private String arr[]=new String[500];
-    //ArrayList<String>idContainer = new ArrayList<String>();
     private TextView noteTime;
     String noteID;
     private  TextView indexImage;
+    String shContent,shTitle = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +60,21 @@ public class NotesListActivity extends AppCompatActivity {
         progressDialog.show();
 
         notesList = (ListView) findViewById(R.id.notes_list_view);
-        //noteTime = (TextView)findViewById(R.id.noteDATE);
-        // content = (TextView)findViewById(R.id.adapterid1);
+
         database = FirebaseDatabase.getInstance();
         fAuth = FirebaseAuth.getInstance();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Toast.makeText(this, "User: "+ Objects.requireNonNull(fAuth.getCurrentUser()).getDisplayName(), Toast.LENGTH_SHORT).show();
         }
-        //String key = database.getReference("Notes").getKey();
-        //fnotesDataBaseReference = database.getReference("Notes").child(key);
-        fnotesDataBaseReference = database.getReference("Notes").child(fAuth.getCurrentUser().getUid());//goes upto
-        //final String keyy =  fnotesDataBaseReference.getKey();
+
+        fnotesDataBaseReference = database.getReference("Notes").child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid());//goes upto
         adapter = new ArrayAdapter<String>(this,R.layout.task_list_row,R.id.noteTitleFB,NotesTitle);
         fnotesDataBaseReference.addValueEventListener(new ValueEventListener() { //error line
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String count = String.valueOf(dataSnapshot.getChildrenCount());
-                System.out.println("qwerty count: "+count);
+                //System.out.println("qwerty count: "+count);
                 int count1 = Integer.parseInt(count);
 
                 if (count1 == 0){
@@ -107,20 +106,9 @@ public class NotesListActivity extends AppCompatActivity {
             for (DataSnapshot ds: dataSnapshot.getChildren())
             {
                 NotesTitle.add(String.valueOf(ds.child("Title").getValue()));
-                // String time = String.valueOf(ds.child("timestamp").getValue());
                 arr[i]=String.valueOf(ds.child("Noteid").getValue());
-                //idContainer.add(String.valueOf(ds.child("Noteid").getValue()));
                 i++;
-                //noteTime.setText(time);
-                //System.out.println("qwerty listval: "+idContainer.get(i));
             }
-
-//            int j = 0;
-//            for(j = 0; j< idContainer.size(); j++){
-//                System.out.println("qwerty listval: "+idContainer.get(j) +" index = "+j);
-//            }
-//            System.out.println("qwerty ==================================");
-//            j = 0;
             progressDialog.dismiss();
 
         }catch (Exception e){
@@ -142,11 +130,10 @@ public class NotesListActivity extends AppCompatActivity {
                 String Title = String.valueOf(dataSnapshot.child(noteID).child("Title").getValue());
                 String Content = String.valueOf(dataSnapshot.child(noteID).child("Content").getValue());
 
-                //Toast.makeText(DescriptionMaker.this, ""+noteID, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NotesListActivity.this,ViewNoteActivity.class);
-                intent.putExtra("title",Title);
-                intent.putExtra("content",Content);
-                intent.putExtra("noteID",noteID);
+                intent.putExtra("title", Title);
+                intent.putExtra("content", Content);
+                intent.putExtra("noteID", noteID);
                 startActivity(intent);
             }
         });
@@ -155,7 +142,6 @@ public class NotesListActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 noteID = arr[i];
-                //noteID = idContainer.get(i);
                 registerForContextMenu(adapterView);
                 return false;
             }
@@ -225,12 +211,81 @@ public class NotesListActivity extends AppCompatActivity {
                 break;
 
             case R.id.share_note:
-                Toast.makeText(this, "Share Note", Toast.LENGTH_SHORT).show();
+                ShareNotesInUsingOtherApps(noteID);
+                //Toast.makeText(this, "Share Note", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.fav_note:
+                AddNotetoImportantList(noteID);
 
             default: return super.onContextItemSelected(item);
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void AddNotetoImportantList(String noteID) {
+
+        fnotesDataBaseReference.child(noteID).child("isImportant").setValue("1").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()){
+                    Toast.makeText(NotesListActivity.this, "Marked as Important!", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(NotesListActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+//        impDBRef = FirebaseDatabase.getInstance().getReference("ImportantNotes").child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid());//goes upto
+//
+//
+//        final DatabaseReference favRef = impDBRef.push();
+//
+//        final Map notemap = new HashMap();
+//        notemap.put("Title", "title");
+//        notemap.put("Content", "notes");
+//        notemap.put("Noteid", favRef.getKey());
+//        notemap.put("timestamp", ServerValue.TIMESTAMP);
+//
+//        favRef.setValue(notemap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//
+//                if(task.isSuccessful()){
+//                    Toast.makeText(NotesListActivity.this, "Marked as Important!", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(NotesListActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        });
+    }
+
+
+
+
+    private void ShareNotesInUsingOtherApps(final String noteID) {
+        fnotesDataBaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                shTitle = String.valueOf(dataSnapshot.child(noteID).child("Title").getValue());
+                shContent = String.valueOf(dataSnapshot.child(noteID).child("Content").getValue());
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                //sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shTitle+"\n"+shContent);
+                startActivity(Intent.createChooser(sharingIntent, " Share Using..."));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+
     }
 
     private void deletenoteonMenuClick(String noteID) {
