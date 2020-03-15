@@ -12,13 +12,6 @@
         android:orientation="vertical"
         android:layout_margin="4dp">
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
-
         <ImageView
             android:id="@+id/facultyTimeTable"
             android:layout_width="match_parent"
@@ -26,11 +19,6 @@
             android:contentDescription="TimeTable"
             android:layout_gravity="center"/>
 
-
-
     </LinearLayout>
-
-
-
 
 </LinearLayout>
