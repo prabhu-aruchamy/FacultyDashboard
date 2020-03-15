@@ -11,11 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View_Profile_Activity"/>
-        <activity android:name=".FacultyListActivity"
-            android:label="Faculty List"
+        <activity android:name=".SettingsActivity"
+            android:label="Settings"
             android:parentActivityName=".HomeActivity">
+
         </activity>
+        <activity android:name=".View_Profile_Activity" />
+        <activity
+            android:name=".FacultyListActivity"
+            android:label="Faculty List"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".AboutUsActivity"
             android:label="About Us"

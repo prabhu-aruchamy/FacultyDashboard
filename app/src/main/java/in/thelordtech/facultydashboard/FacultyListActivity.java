@@ -52,8 +52,9 @@ public class FacultyListActivity extends AppCompatActivity {
 
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     String isProfileFullyUpdated = String.valueOf(ds.child("isProfileUpdatedFully").getValue());
+                    String isProfilePrivate = String.valueOf(ds.child("isProfilePrivate").getValue());
 
-                    if(isProfileFullyUpdated.equals("1")){   //only adds the faculty who has updated their profile fully!
+                    if(isProfileFullyUpdated.equals("1") && isProfilePrivate.equals("0")){   //only adds the faculty who has updated their profile fully!
                         String ficon, fname, fuid, femail, fnum, fbio, fedu, fproj, fresume;
 
                         ficon = String.valueOf(ds.child("IconURL").getValue());

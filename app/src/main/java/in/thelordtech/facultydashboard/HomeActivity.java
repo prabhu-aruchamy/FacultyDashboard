@@ -101,6 +101,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    public void openSettingsActivity(MenuItem item){
+        startActivity(new Intent(this, SettingsActivity.class));
+    }
+
     public void CheckForUpdates(MenuItem item){
 
         updateRef.addValueEventListener(new ValueEventListener() {
