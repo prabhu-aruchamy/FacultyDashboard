@@ -31,7 +31,7 @@ public class Mark_Attendance extends AppCompatActivity {
     RadioButton radioButton;
     ImageView ivstudentpic;
     Button update;
-    DatabaseReference mRef, fUID, studentID;
+    DatabaseReference mRef, fUID, studentIDref;
     FirebaseAuth fAuth;
     String courseid, studentid, studentname, attendance
             , totalclasses;
@@ -54,7 +54,7 @@ public class Mark_Attendance extends AppCompatActivity {
        fAuth = FirebaseAuth.getInstance();
         fUID = mRef.child(fAuth.getCurrentUser().getUid());
 /*        fUID = mRef.child("id1");*/
-        studentID = fUID.child(courseid).child(studentid);
+        studentIDref = fUID.child(courseid).child(studentid);
 
         update = findViewById(R.id.update);
         rg = findViewById(R.id.rg);
@@ -78,8 +78,8 @@ public class Mark_Attendance extends AppCompatActivity {
                     Log.d("Mark_Attendance", attendance+"   "+totalclasses);
                     attendance = (Integer.parseInt(attendance) + 1) + "";
                     totalclasses = (Integer.parseInt(totalclasses) + 1) + "";
-                    studentID.child("attendance").setValue(attendance);
-                    studentID.child("totalclasses").setValue(totalclasses);
+                    studentIDref.child("attendance").setValue(attendance);
+                    studentIDref.child("totalclasses").setValue(totalclasses);
                     Toast.makeText(Mark_Attendance.this
                             , "Attendance Marked", Toast.LENGTH_SHORT).show();
                 }
@@ -87,7 +87,7 @@ public class Mark_Attendance extends AppCompatActivity {
                 {
                     Log.d("Mark_Attendance", attendance+"   "+totalclasses);
                     totalclasses = (Integer.parseInt(totalclasses) + 1) + "";
-                    studentID.child("totalclasses").setValue(totalclasses);
+                    studentIDref.child("totalclasses").setValue(totalclasses);
                     Toast.makeText(Mark_Attendance.this
                             , "Attendance Marked", Toast.LENGTH_SHORT).show();
                 }

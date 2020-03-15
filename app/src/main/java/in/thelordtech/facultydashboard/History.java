@@ -214,7 +214,7 @@ public class History extends AppCompatActivity {
                 else {
                     Toast.makeText(getApplicationContext() , "Please Connect to Internet", Toast.LENGTH_SHORT).show();
                 }
-
+                return super.onContextItemSelected(item);
             default: return super.onContextItemSelected(item);
         }
     }

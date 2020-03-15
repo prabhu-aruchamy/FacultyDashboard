@@ -22,7 +22,7 @@ public class ViewStudentDetails extends AppCompatActivity {
             ,tvattendancepercent ;
     String studentname, studentid, courseid, marks, attendance, totalclasses;
     double attendancePercent;
-    DatabaseReference mRef, fUID, studentID;
+    DatabaseReference mRef, fUID, studentIDref;
        FirebaseAuth fAuth;
     DecimalFormat df2 = new DecimalFormat("#.##");
 
@@ -49,7 +49,7 @@ public class ViewStudentDetails extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fUID = mRef.child(fAuth.getCurrentUser().getUid());
         //fUID = mRef.child("id1");
-        studentID = fUID.child(courseid).child(studentid);
+        studentIDref = fUID.child(courseid).child(studentid);
         //sets a student's details to their corresponding views
         displayStudentDetails();
 
@@ -58,7 +58,7 @@ public class ViewStudentDetails extends AppCompatActivity {
 
     private void displayStudentDetails()
     {
-        studentID.addValueEventListener(new ValueEventListener() {
+        studentIDref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {

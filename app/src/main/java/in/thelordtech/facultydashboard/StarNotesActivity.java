@@ -2,6 +2,7 @@ package in.thelordtech.facultydashboard;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -159,7 +161,7 @@ public class StarNotesActivity extends AppCompatActivity {
 
             case R.id.rem_fav_note:
                 RemoveNotesFromImportantList(impNoteID);
-
+                break;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -196,6 +198,7 @@ public class StarNotesActivity extends AppCompatActivity {
     private void RemoveNotesFromImportantList(String noteID) {
 
         impDataBaseReference.child(noteID).child("isImportant").setValue("0").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 

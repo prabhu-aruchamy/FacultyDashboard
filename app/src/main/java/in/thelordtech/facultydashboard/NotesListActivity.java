@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -216,7 +217,7 @@ public class NotesListActivity extends AppCompatActivity {
 
             case R.id.fav_note:
                 AddNotetoImportantList(noteID);
-
+                break;
             default: return super.onContextItemSelected(item);
         }
         return super.onContextItemSelected(item);
@@ -225,6 +226,7 @@ public class NotesListActivity extends AppCompatActivity {
     private void AddNotetoImportantList(String noteID) {
 
         fnotesDataBaseReference.child(noteID).child("isImportant").setValue("1").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 

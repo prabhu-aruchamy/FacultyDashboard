@@ -41,9 +41,11 @@ import java.util.Map;
 
 public class CourseDetails extends AppCompatActivity {
 
-    DatabaseReference mRef, fUID, courseID;
-    /*    FirebaseAuth fAuth;*/
-    String courseid, coursename;
+    DatabaseReference mRef;
+    DatabaseReference fUID;
+    DatabaseReference courseIDref;
+    String courseid;
+    String coursename;
     ListView lv;
     List<String> studentid = new ArrayList<>();
     List<String> studentname = new ArrayList<>();
@@ -60,6 +62,12 @@ public class CourseDetails extends AppCompatActivity {
     DecimalFormat df2 = new DecimalFormat("#");
     double attendancePercent;
     FirebaseAuth fAuth;
+    String cid = "courseid";
+    String stuid = "studentid";
+    String mrk = "marks";
+    String tclass = "totalclasses";
+    String atd = "attendance";
+    String stuname = "studentname";
 
 
     @Override
@@ -124,15 +132,14 @@ public class CourseDetails extends AppCompatActivity {
 
         lv =findViewById(R.id.list);
         Bundle b = getIntent().getExtras();
-        courseid = b.getString("courseid");
+        courseid = b.getString(cid);
         coursename = b.getString("coursename");
         messages = new ArrayList<>();
 
         mRef = FirebaseDatabase.getInstance().getReference().child("courses");
         fAuth = FirebaseAuth.getInstance();
         fUID = mRef.child(fAuth.getCurrentUser().getUid());
-/*        fUID = mRef.child("id1");*/
-        courseID = fUID.child(courseid);
+        courseIDref = fUID.child(courseid);
 
         studentPic.put("stid1", R.drawable.student1);
         studentPic.put("stid2", R.drawable.student2);
@@ -167,21 +174,21 @@ public class CourseDetails extends AppCompatActivity {
 
     private void createListOfStudentsInSelectedCourse()
     {
-        courseID.addListenerForSingleValueEvent(new ValueEventListener() {
+        courseIDref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 for (DataSnapshot studentDetails: dataSnapshot.getChildren())
                 {
-                    studentid.add( studentDetails.child("studentid")
+                    studentid.add( studentDetails.child(stuid)
                             .getValue(String.class) );
-                    studentname.add( studentDetails.child("studentname")
+                    studentname.add( studentDetails.child(stuname)
                             .getValue(String.class) );
-                    attendance.add( studentDetails.child("attendance")
+                    attendance.add( studentDetails.child(atd)
                             .getValue(String.class));
-                    totalclasses.add( studentDetails.child("totalclasses")
+                    totalclasses.add( studentDetails.child(tclass)
                             .getValue(String.class));
-                    marks.add(studentDetails.child("marks")
+                    marks.add(studentDetails.child(mrk)
                             .getValue(String.class));
 
                 }
@@ -275,10 +282,10 @@ public class CourseDetails extends AppCompatActivity {
             case R.id.edit:
                 Intent intent2 = new Intent(CourseDetails.this
                         , EditStudentDetails.class);
-                intent2.putExtra("studentid", studentid.get(info.position));
-                intent2.putExtra("studentname", studentname.get(info.position));
-                intent2.putExtra("courseid", courseid);
-                intent2.putExtra("totalclasses", totalclasses.get(info.position));
+                intent2.putExtra(stuid, studentid.get(info.position));
+                intent2.putExtra(stuname, studentname.get(info.position));
+                intent2.putExtra(cid, courseid);
+                intent2.putExtra(tclass, totalclasses.get(info.position));
                 intent2.putExtra("studentPic", ""+studentPic.get(studentid.get(info.position)));
 
                 startActivity(intent2);
@@ -287,12 +294,12 @@ public class CourseDetails extends AppCompatActivity {
             case R.id.markAttendance:
                 Intent intent3 = new Intent(CourseDetails.this,
                         Mark_Attendance.class);
-                intent3.putExtra("studentid", studentid.get(info.position));
-                intent3.putExtra("studentname", studentname.get(info.position));
-                intent3.putExtra("courseid", courseid);
-                intent3.putExtra("attendance", attendance.get(info.position));
-                intent3.putExtra("totalclasses", totalclasses.get(info.position));
-                intent3.putExtra("marks", marks.get(info.position));
+                intent3.putExtra(stuid, studentid.get(info.position));
+                intent3.putExtra(stuname, studentname.get(info.position));
+                intent3.putExtra(cid, courseid);
+                intent3.putExtra(atd, attendance.get(info.position));
+                intent3.putExtra(tclass, totalclasses.get(info.position));
+                intent3.putExtra(mrk, marks.get(info.position));
                 intent3.putExtra("studentPic", ""+studentPic.get(studentid.get(info.position)));
 
                 startActivity(intent3);
@@ -324,14 +331,14 @@ public class CourseDetails extends AppCompatActivity {
 
         strstudentid = studentid.get(info.position);
         strstudentname = studentname.get(info.position);
-        courseID.child(strstudentid).addValueEventListener(new ValueEventListener()
+        courseIDref.child(strstudentid).addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                strmarks = dataSnapshot.child("marks").getValue(String.class);
-                strattendance = dataSnapshot.child("attendance").getValue(String.class);
-                strtotalclasses = dataSnapshot.child("totalclasses").getValue(String.class);
+                strmarks = dataSnapshot.child(mrk).getValue(String.class);
+                strattendance = dataSnapshot.child(atd).getValue(String.class);
+                strtotalclasses = dataSnapshot.child(tclass).getValue(String.class);
                 stremail = dataSnapshot.child("email").getValue(String.class);
                 alert_studentImage.setImageResource(studentPic.get(strstudentid));
                 alert_tvname.setText(strstudentname);
@@ -347,6 +354,7 @@ public class CourseDetails extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
+                Log.d("CourseDetails", "Only Because of Static Test");
             }
         });
 
