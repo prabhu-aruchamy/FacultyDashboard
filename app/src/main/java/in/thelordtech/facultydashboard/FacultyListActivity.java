@@ -48,6 +48,8 @@ public class FacultyListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                facultyarrayList.clear();
+
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     String isProfileFullyUpdated = String.valueOf(ds.child("isProfileUpdatedFully").getValue());
 
