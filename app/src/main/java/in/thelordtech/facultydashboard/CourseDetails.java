@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /*import com.google.firebase.auth.FirebaseAuth;*/
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +59,7 @@ public class CourseDetails extends AppCompatActivity {
     ImageView alert_studentImage;
     DecimalFormat df2 = new DecimalFormat("#");
     double attendancePercent;
+    FirebaseAuth fAuth;
 
 
     @Override
@@ -127,9 +129,9 @@ public class CourseDetails extends AppCompatActivity {
         messages = new ArrayList<>();
 
         mRef = FirebaseDatabase.getInstance().getReference().child("courses");
-/*        fAuth = FirebaseAuth.getInstance();
-        fUID = mRef.child(fAuth.getCurrentUser().getUid());*/
-        fUID = mRef.child("id1");
+        fAuth = FirebaseAuth.getInstance();
+        fUID = mRef.child(fAuth.getCurrentUser().getUid());
+/*        fUID = mRef.child("id1");*/
         courseID = fUID.child(courseid);
 
         studentPic.put("stid1", R.drawable.student1);
