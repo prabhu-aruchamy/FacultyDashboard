@@ -8,6 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".ViewSchedule">
 
+    <EditText
+        android:id="@+id/edit_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="  Enter a Filter"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="18sp" />
+
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"

@@ -1,26 +1,38 @@
 package in.thelordtech.facultydashboard;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+/*import com.google.firebase.auth.FirebaseAuth;*/
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditStudentDetails extends AppCompatActivity {
 
-
     Button button;
-    TextView tvname, tvid;
+    TextView tvname, tvid, tvtotalclasses;
+    ImageView ivstudentpic;
     EditText etmarks, etattendance;
     String studentname, studentid, courseid, totalclasses;
     DatabaseReference mRef, fUID, studentID;
+    int studentPic;
     FirebaseAuth fAuth;
 
     @Override
@@ -33,21 +45,26 @@ public class EditStudentDetails extends AppCompatActivity {
         studentid = b.getString("studentid");
         courseid = b.getString("courseid");
         totalclasses = b.getString("totalclasses");
+        studentPic = Integer.parseInt(b.getString("studentPic") );
 
         tvname = findViewById(R.id.tvname);
+        ivstudentpic = findViewById(R.id.studentImage);
+        tvtotalclasses = findViewById(R.id.tvtotalclasses);
         tvid = findViewById(R.id.tvid);
         etmarks= findViewById(R.id.etmarks);
         etattendance = findViewById(R.id.etattendance);
         button = findViewById(R.id.button);
 
         mRef = FirebaseDatabase.getInstance().getReference().child("courses");
-       fAuth = FirebaseAuth.getInstance();
+        fAuth = FirebaseAuth.getInstance();
         fUID = mRef.child(fAuth.getCurrentUser().getUid());
-        //fUID = mRef.child("id1");
+/*        fUID = mRef.child("id1");*/
         studentID = fUID.child(courseid).child(studentid);
 
+        ivstudentpic.setImageResource(studentPic);
         tvname.setText(studentname);
         tvid.setText(studentid);
+        tvtotalclasses.setText(totalclasses);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,5 +129,6 @@ public class EditStudentDetails extends AppCompatActivity {
         }
 
     }
+
 
 }

@@ -1047,7 +1047,8 @@
             android:layout_margin="10dp"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="10dp"
-            android:background="#121212">
+            android:background="#121212"
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -1058,12 +1059,6 @@
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
-
-
-
-
-
-
 
     </LinearLayout>
 </ScrollView>

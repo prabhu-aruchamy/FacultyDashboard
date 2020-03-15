@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this, FacultyChatActivity.class);
+                Intent i = new Intent(HomeActivity.this, FacultyListActivity.class);
                 startActivity(i);
             }
         });
