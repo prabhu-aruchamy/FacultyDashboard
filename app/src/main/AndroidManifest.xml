@@ -11,15 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FacultyListActivity"></activity>
+        <activity android:name=".View_Profile_Activity"></activity>
+        <activity android:name=".FacultyListActivity" />
         <activity
             android:name=".AboutUsActivity"
             android:label="About Us"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".StarNotesActivity"
             android:label="Important Notes"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".Mark_Attendance" />
         <activity android:name=".EditStudentDetails" />
         <activity android:name=".ViewStudentDetails" />
@@ -31,7 +32,7 @@
         <activity
             android:name=".TimeTableActivity"
             android:label="TimeTable"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".EditFacultyProfile" />
         <activity android:name=".FacultyProfileActivity" />
         <activity android:name=".ViewNoteActivity" />
@@ -39,7 +40,7 @@
         <activity
             android:name=".NotesListActivity"
             android:label="Notes"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -54,11 +55,11 @@
         <activity
             android:name=".ForgotPasswordActivity"
             android:label="Reset Password"
-            android:parentActivityName=".LoginActivity"></activity>
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".RegisterActivity"
             android:label="Reset Password"
-            android:parentActivityName=".LoginActivity"></activity>
+            android:parentActivityName=".LoginActivity" />
         <activity android:name=".RequestAppointmentActivity" />
     </application>
 

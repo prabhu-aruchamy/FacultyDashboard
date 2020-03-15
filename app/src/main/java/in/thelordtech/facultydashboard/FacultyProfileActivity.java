@@ -129,8 +129,6 @@ public class FacultyProfileActivity extends AppCompatActivity {
         DownloadResume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(FacultyProfileActivity.this, resumeDownloadLink, Toast.LENGTH_SHORT).show();
-
                 String url = resumeDownloadLink;
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));

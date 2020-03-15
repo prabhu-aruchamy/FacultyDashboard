@@ -1,9 +1,11 @@
 package in.thelordtech.facultydashboard;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,7 +50,6 @@ public class FacultyListActivity extends AppCompatActivity {
 
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     String isProfileFullyUpdated = String.valueOf(ds.child("isProfileUpdatedFully").getValue());
-                    Toast.makeText(FacultyListActivity.this, "update? "+isProfileFullyUpdated, Toast.LENGTH_SHORT).show();
 
                     if(isProfileFullyUpdated.equals("1")){   //only adds the faculty who has updated their profile fully!
                         String ficon, fname, fuid, femail, fnum, fbio, fedu, fproj, fresume;
@@ -77,6 +78,25 @@ public class FacultyListActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 progressDialog.dismiss();
+
+            }
+        });
+
+
+        fac_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Faculty dataModel = facultyarrayList.get(position);
+                Intent intent = new Intent(FacultyListActivity.this, View_Profile_Activity.class);
+                intent.putExtra("ficon", dataModel.getFacultyIconLink());
+                intent.putExtra("fname", dataModel.getFacutyName());
+                intent.putExtra("femail", dataModel.getFacultyEmail());
+                intent.putExtra("fnum", dataModel.getFacultyNumber());
+                intent.putExtra("fbio", dataModel.getFacultyBio());
+                intent.putExtra("fedu", dataModel.getFacultyEducation());
+                intent.putExtra("fproj", dataModel.getFacultyProjects());
+                intent.putExtra("fresume", dataModel.getFacultyResume());
+                startActivity(intent);
 
             }
         });
