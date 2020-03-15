@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutUsActivity"
+        <activity android:name=".FacultyListActivity"></activity>
+        <activity
+            android:name=".AboutUsActivity"
             android:label="About Us"
-            android:parentActivityName=".HomeActivity">
-        </activity>
-        <activity android:name=".StarNotesActivity"
+            android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".StarNotesActivity"
             android:label="Important Notes"
-            android:parentActivityName=".HomeActivity">
-        </activity>
+            android:parentActivityName=".HomeActivity"></activity>
         <activity android:name=".Mark_Attendance" />
         <activity android:name=".EditStudentDetails" />
         <activity android:name=".ViewStudentDetails" />
@@ -27,20 +28,18 @@
         <activity android:name=".History" />
         <activity android:name=".ExistSchedule" />
         <activity android:name=".ViewSchedule" />
-        <activity android:name=".TimeTableActivity"
+        <activity
+            android:name=".TimeTableActivity"
             android:label="TimeTable"
-            android:parentActivityName=".HomeActivity">
-        </activity>
+            android:parentActivityName=".HomeActivity"></activity>
         <activity android:name=".EditFacultyProfile" />
         <activity android:name=".FacultyProfileActivity" />
         <activity android:name=".ViewNoteActivity" />
         <activity android:name=".AddNoteActivity" />
-        <activity android:name=".NotesListActivity"
+        <activity
+            android:name=".NotesListActivity"
             android:label="Notes"
-            android:parentActivityName=".HomeActivity">
-
-        </activity>
-        <activity android:name=".FacultyChatActivity" />
+            android:parentActivityName=".HomeActivity"></activity>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -52,14 +51,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ForgotPasswordActivity"
+        <activity
+            android:name=".ForgotPasswordActivity"
             android:label="Reset Password"
-            android:parentActivityName=".LoginActivity">
-        </activity>
-        <activity android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity"></activity>
+        <activity
+            android:name=".RegisterActivity"
             android:label="Reset Password"
-            android:parentActivityName=".LoginActivity">
-        </activity>
+            android:parentActivityName=".LoginActivity"></activity>
         <activity android:name=".RequestAppointmentActivity" />
     </application>
 

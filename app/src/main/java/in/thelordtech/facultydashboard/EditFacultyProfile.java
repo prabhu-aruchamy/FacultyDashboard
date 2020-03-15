@@ -102,7 +102,9 @@ public class EditFacultyProfile extends AppCompatActivity {
                     Toast.makeText(EditFacultyProfile.this, "Phone Number Must be 10 digits!", Toast.LENGTH_SHORT).show();
                 }else if(ProfileIconFlag == 0){
                     Toast.makeText(EditFacultyProfile.this, "Select Profile Image", Toast.LENGTH_SHORT).show();
-                }else{
+                }else if(uploadResume.getText().toString().length() < 10 || !(uploadResume.getText().toString().contains(".")) || !(uploadResume.getText().toString().contains("http"))){
+                    Toast.makeText(EditFacultyProfile.this, "Not a Valid Resume Link!", Toast.LENGTH_SHORT).show();
+                } else{
                     UpdateProfile(editNumber.getText().toString(), editBio.getText().toString(), editEducation.getText().toString());
                 }
             }
