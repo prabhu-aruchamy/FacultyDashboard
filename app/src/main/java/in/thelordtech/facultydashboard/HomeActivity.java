@@ -88,6 +88,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(new Intent(this, StarNotesActivity.class));
     }
 
+    public void openAboutUsActivity(MenuItem item){
+        startActivity(new Intent(this, AboutUsActivity.class));
+
+    }
+
     public void CheckForUpdates(MenuItem item){
 
         updateRef.addValueEventListener(new ValueEventListener() {

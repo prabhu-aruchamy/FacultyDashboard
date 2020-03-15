@@ -32,8 +32,9 @@
                 android:title="Contact Us" />
 
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info"
+                android:onClick="openAboutUsActivity"
                 android:title="About Us" />
 
         </menu>

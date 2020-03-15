@@ -1,9 +1,8 @@
 package in.thelordtech.facultydashboard;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,9 +27,7 @@ public class TimeTableActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     String TimetableLink = "";
     String uid = "";
-    ProgressBar progress;
-   // PhotoViewAttacher pAttacher;
-
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +35,12 @@ public class TimeTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_table);
 
         facultyTimeTable = findViewById(R.id.facultyTimeTable);
-        progress = findViewById(R.id.progress);
-        progress.setVisibility(View.VISIBLE);
+        progressDialog = new ProgressDialog(TimeTableActivity.this);
+        progressDialog.setMessage("Loading TimeTable...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         firebaseAuth = FirebaseAuth.getInstance();
         uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-        //pAttacher = new PhotoViewAttacher(facultyTimeTable);
-        //pAttacher.update();
         LoadTimeTable();
     }
 
@@ -62,15 +59,13 @@ public class TimeTableActivity extends AppCompatActivity {
                         TimetableLink = String.valueOf(ds.child("TimeTable").getValue());
                         setImagetoImageView(TimetableLink);
                     }
-
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Utils.showToast(TimeTableActivity.this,"Error: "+databaseError.getMessage());
-                progress.setVisibility(View.GONE);
+                progressDialog.dismiss();
 
             }
         });
@@ -81,10 +76,10 @@ public class TimeTableActivity extends AppCompatActivity {
     private void setImagetoImageView(String timetableLink) {
         try {
             Picasso.get().load(timetableLink).into(facultyTimeTable);
-            progress.setVisibility(View.GONE);
+            progressDialog.dismiss();
 
         }catch (Exception e){
-            progress.setVisibility(View.GONE);
+            progressDialog.dismiss();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
