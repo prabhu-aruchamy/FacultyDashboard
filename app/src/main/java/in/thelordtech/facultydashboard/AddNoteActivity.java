@@ -33,7 +33,6 @@ public class AddNoteActivity extends AppCompatActivity {
     private EditText notesDescription;
     private FirebaseAuth fAuth;
     private DatabaseReference fnotesDataBase;
-    private Button savebtnn;
     private Button closeADDnote;
     private  int checkforclick;
     ProgressDialog progressDialog;
@@ -50,6 +49,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
         notesTitle = (EditText) findViewById(R.id.video_title_edit_text);
         notesDescription = (EditText) findViewById(R.id.description_edit_text);
+        Button savebtnn;
         savebtnn = (Button)findViewById(R.id.saveee);
         closeADDnote = (Button) findViewById(R.id.close_addnote_activity);
 
