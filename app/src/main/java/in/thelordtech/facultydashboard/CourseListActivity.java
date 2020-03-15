@@ -36,16 +36,7 @@ import java.util.Map;
 import in.thelordtech.facultydashboard.CourseDetails;
 import in.thelordtech.facultydashboard.R;
 
-/*Firebase Database structure
-    courses
-  - <faculty uids>
-  - <course ids>
-  - <student ids>
-  - <student details>
-*/
-//UI modification(All)
-//Extensify the database(Add more student records for each course, increse no. of courses for each faculty)
-//Display only those courses which faculty has enrolled for
+
 
 public class CourseListActivity extends AppCompatActivity {
 
@@ -53,9 +44,7 @@ public class CourseListActivity extends AppCompatActivity {
     DatabaseReference mref, fUID;
     ListView lv;
     String selectedCourseId, selectedCourseName;
-    /*    String courseid[] = {"15CSE311", "15CSE312", "15CSE313", "15MAT315", "15CSE432"};
-        String coursename[] = {"Compiler Design", "Computer Networks",
-                "Software Engineering", "Calculus", "Machine Learning"};*/
+
     List<String> courseid = new ArrayList<>();
     List<String> coursename = new ArrayList<>();
     HashMap<String,String> content ;
@@ -71,7 +60,7 @@ public class CourseListActivity extends AppCompatActivity {
         mref = FirebaseDatabase.getInstance().getReference().child("courses");
         fAuth = FirebaseAuth.getInstance();
         fUID = mref.child(fAuth.getCurrentUser().getUid());
-/*        fUID = mref.child("id1");*/
+
         lv=findViewById(R.id.lv);
 
         coursehm = new HashMap<>();
