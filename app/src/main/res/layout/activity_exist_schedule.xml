@@ -43,7 +43,7 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="4dp"
                 android:textColor="#ffffff"
-                android:text="Update Note"
+                android:text="Update Schedule"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 />

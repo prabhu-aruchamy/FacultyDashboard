@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /*import com.google.firebase.auth.FirebaseAuth;*/
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +33,7 @@ public class EditStudentDetails extends AppCompatActivity {
     String studentname, studentid, courseid, totalclasses;
     DatabaseReference mRef, fUID, studentID;
     int studentPic;
-    /*    FirebaseAuth fAuth;*/
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +56,9 @@ public class EditStudentDetails extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         mRef = FirebaseDatabase.getInstance().getReference().child("courses");
-/*        fAuth = FirebaseAuth.getInstance();
-        fUID = mRef.child(fAuth.getCurrentUser().getUid());*/
-        fUID = mRef.child("id1");
+        fAuth = FirebaseAuth.getInstance();
+        fUID = mRef.child(fAuth.getCurrentUser().getUid());
+/*        fUID = mRef.child("id1");*/
         studentID = fUID.child(courseid).child(studentid);
 
         ivstudentpic.setImageResource(studentPic);

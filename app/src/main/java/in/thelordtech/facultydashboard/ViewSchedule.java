@@ -1,5 +1,8 @@
 package in.thelordtech.facultydashboard;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +10,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -14,13 +19,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,9 +45,11 @@ import java.util.Objects;
 
 public class ViewSchedule extends AppCompatActivity {
     ArrayList<String> NotesTitle = new ArrayList<>();
-    SimpleAdapter adapter;
+    private SimpleAdapter adapter;
+    ArrayAdapter ada;
     ListView notesList;
     private FirebaseAuth fAuth;
+    EditText filter;
     private FirebaseDatabase database;
     private DatabaseReference fnotesDataBaseReference;
     private ProgressDialog progressDialog;
@@ -56,7 +63,7 @@ public class ViewSchedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
-
+        filter = findViewById(R.id.edit_filter);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...\nLoading your Schedule...");
         progressDialog.setCancelable(false);
@@ -100,6 +107,29 @@ public class ViewSchedule extends AppCompatActivity {
                 System.out.println("ERROR!");
                 Toast.makeText(getApplicationContext(), "Error: "+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
+            }
+        });
+
+        filter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    adapter.getFilter().filter(s);
+                }
+                catch(Exception e){
+                    Toast.makeText(getApplicationContext(),"Requested Data not available",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -291,7 +321,7 @@ public class ViewSchedule extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        getMenuInflater().inflate(R.menu.delete_note_menu,menu);
+        getMenuInflater().inflate(R.menu.shedul_delete_menu,menu);
     }
 
     @Override

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,6 +49,7 @@ import in.thelordtech.facultydashboard.R;
 
 public class CourseListActivity extends AppCompatActivity {
 
+    FirebaseAuth fAuth;
     DatabaseReference mref, fUID;
     ListView lv;
     String selectedCourseId, selectedCourseName;
@@ -67,9 +69,9 @@ public class CourseListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course_list);
 
         mref = FirebaseDatabase.getInstance().getReference().child("courses");
-/*        fAuth = FirebaseAuth.getInstance();
-        fUID = mref.child(fAuth.getCurrentUser().getUid());*/
-        fUID = mref.child("id1");
+        fAuth = FirebaseAuth.getInstance();
+        fUID = mref.child(fAuth.getCurrentUser().getUid());
+/*        fUID = mref.child("id1");*/
         lv=findViewById(R.id.lv);
 
         coursehm = new HashMap<>();

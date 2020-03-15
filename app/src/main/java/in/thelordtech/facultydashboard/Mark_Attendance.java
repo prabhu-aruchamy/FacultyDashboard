@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /*import com.google.firebase.auth.FirebaseAuth;*/
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,7 @@ public class Mark_Attendance extends AppCompatActivity {
     ImageView ivstudentpic;
     Button update;
     DatabaseReference mRef, fUID, studentID;
-    /*    FirebaseAuth fAuth;*/
+    FirebaseAuth fAuth;
     String courseid, studentid, studentname, attendance
             , totalclasses;
     int studentPic;
@@ -50,9 +51,9 @@ public class Mark_Attendance extends AppCompatActivity {
         studentPic = Integer.parseInt(b.getString("studentPic") );
 
         mRef = FirebaseDatabase.getInstance().getReference().child("courses");
-/*       fAuth = FirebaseAuth.getInstance();
-        fUID = mRef.child(fAuth.getCurrentUser().getUid());*/
-        fUID = mRef.child("id1");
+       fAuth = FirebaseAuth.getInstance();
+        fUID = mRef.child(fAuth.getCurrentUser().getUid());
+/*        fUID = mRef.child("id1");*/
         studentID = fUID.child(courseid).child(studentid);
 
         update = findViewById(R.id.update);
