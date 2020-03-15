@@ -1,92 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:orientation="vertical"
-    android:background="#ECECEC"
+    android:background="#121212"
     tools:context=".RequestAppointmentActivity">
 
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <EditText
-            android:onClick="setFromDate"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/from_date"
-            android:focusable="false"
-            android:inputType="date"
-            android:hint="@string/appointment_date"/>
-
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-
-
-        <EditText
-            android:onClick="setFromTime"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/from_time"
-            android:focusable="false"
-            android:singleLine="true"
-            android:inputType="date"
-            android:hint="@string/hh_mm"/>
-
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-
-
-        <EditText
-            android:onClick="setToTime"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/to_time"
-            android:focusable="false"
-            android:singleLine="true"
-            android:inputType="date"
-            android:hint="@string/hi_mm"/>
-
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/groundsEdittext"
-            android:layout_width="match_parent"
-            android:hint="@string/tell_us_why_you_would_like_to_have_a_meeting"
-            android:minHeight="20dp"
-            android:layout_marginTop="8dp"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:layout_height="wrap_content"
-            />
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-    <Button
-        android:id="@+id/login"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toptoolbar"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/button"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="submit"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:text="Submit"
-        tools:ignore="HardcodedText,UnusedAttribute" />
-    <ScrollView
+        android:background="@drawable/yellow_gradiant_btn"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:gravity="center_vertical">
+            <Button
+                android:id="@+id/closebtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:padding="5dp"
+                android:onClick="goback"
+                android:layout_margin="5dp"
+                android:background="@drawable/ic_can"
+                />
+            <TextView
+                android:id="@+id/toolbar_task_add_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="0dp"
+                android:gravity="center_vertical|start"
+                android:paddingLeft="16dp"
+                android:paddingRight="4dp"
+                android:textColor="#ffffff"
+                android:text="Add Schedule"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/updatebtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:padding="5dp"
+                android:onClick="submit"
+                android:layout_marginRight="13dp"
+                android:background="@drawable/notes_done_btn_image" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/linerlayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toptoolbar"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/from_date"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_border"
+                android:focusable="false"
+                android:hint="@string/appointment_date"
+                android:inputType="date"
+                android:onClick="setFromDate"
+                android:paddingLeft="8dp"
+
+                />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/from_time"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/edit_text_border"
+                android:focusable="false"
+                android:hint="@string/hh_mm"
+                android:inputType="date"
+                android:onClick="setFromTime"
+                android:paddingLeft="0dp"
+                android:singleLine="true" />
+
+
+            />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/to_time"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/edit_text_border"
+                android:focusable="false"
+                android:hint="@string/hi_mm"
+                android:inputType="date"
+                android:onClick="setToTime"
+                android:paddingLeft="8dp"
+                android:singleLine="true" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/groundsEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/tell_us_why_you_would_like_to_have_a_meeting"
+                android:maxLines="1"
+                android:minHeight="20dp"
+                android:paddingLeft="8dp"
+                android:singleLine="true" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+
+
+    </LinearLayout>
+</RelativeLayout>

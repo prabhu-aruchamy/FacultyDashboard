@@ -1,23 +1,27 @@
 package in.thelordtech.facultydashboard;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +46,7 @@ public class History extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private FirebaseDatabase database;
     private DatabaseReference fnotesDataBaseReference;
+    EditText filter;
     private ProgressDialog progressDialog;
     private TextView content;
     ArrayList<Map<String,String>> item = new ArrayList<Map<String,String>>();
@@ -93,6 +98,22 @@ public class History extends AppCompatActivity {
                 System.out.println("ERROR!");
                 Toast.makeText(getApplicationContext(), "Error: "+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
+            }
+        });
+        filter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
