@@ -157,7 +157,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@Chopper-47"
+                            android:text="Chopper-47"
                             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
                     </LinearLayout>
 
@@ -333,7 +333,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@Dhanishwar"
+                            android:text="Dhanishwar"
                             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
                     </LinearLayout>
 
@@ -488,7 +488,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@Gowtham128"
+                            android:text="Gowtham128"
                             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
                     </LinearLayout>
 
@@ -656,7 +656,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@thelordtech"
+                            android:text="thelordtech"
                             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
                     </LinearLayout>
                     <LinearLayout
@@ -840,7 +840,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@kpforeva"
+                            android:text="kpforeva"
                             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
                     </LinearLayout>
 
@@ -1004,7 +1004,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@vamshhiv9"
+                            android:text="vamshhiv9"
                             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
                     </LinearLayout>
 
