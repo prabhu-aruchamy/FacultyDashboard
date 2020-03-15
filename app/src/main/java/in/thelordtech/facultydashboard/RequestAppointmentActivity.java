@@ -341,11 +341,6 @@ public class RequestAppointmentActivity extends AppCompatActivity {
 
                                         int hr = 13;
                                         int mn = 30;
-                                        Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-                                        intent.putExtra(AlarmClock.EXTRA_HOUR,hr);
-                                        intent.putExtra(AlarmClock.EXTRA_MINUTES,mn);
-                                        intent.putExtra(AlarmClock.EXTRA_MESSAGE,"Check your app for schedules");
-                                        startActivity(intent);
                                         progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Schedule Added Sucessfully", Toast.LENGTH_SHORT).show();
 
