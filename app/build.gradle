@@ -38,7 +38,7 @@ dependencies {
     implementation 'com.commit451:PhotoView:1.2.4'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-analytics:17.2.3'
 
     //UI Libraries
     implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
@@ -53,6 +53,10 @@ dependencies {
 
     //Image View
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    //update checker
+    implementation 'com.github.javiersantos:AppUpdater:2.7'
+
 
 }
 

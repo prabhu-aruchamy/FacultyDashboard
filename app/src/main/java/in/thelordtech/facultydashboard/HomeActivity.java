@@ -19,6 +19,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.enums.Display;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,7 +66,12 @@ public class HomeActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         updateRef = FirebaseDatabase.getInstance().getReference("Update");
-        checkUpdates();
+        AppUpdater appUpdater = new AppUpdater(HomeActivity.this)
+                .setDisplay(Display.DIALOG)
+                .setUpdateFrom(UpdateFrom.GITHUB)
+                .setGitHubUserAndRepo("thelordtech", "FacultyDashboard");
+        appUpdater.start();
+        //checkUpdates();
     }
 
     @Override
