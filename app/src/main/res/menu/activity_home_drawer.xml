@@ -19,9 +19,10 @@
             android:title="Check For Updates"
             android:onClick="CheckForUpdates"/>
         <item
-            android:id="@+id/nav_tools"
+            android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Settings" />
+            android:title="Settings"
+            android:onClick="openSettingsActivity"/>
     </group>
 
     <item android:title="Communicate">
