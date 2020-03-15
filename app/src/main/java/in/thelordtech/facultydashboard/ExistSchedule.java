@@ -208,7 +208,6 @@ public class ExistSchedule extends AppCompatActivity {
                     minutes = "0" + min;
                 else
                     minutes = String.valueOf(min);
-//                mi = minutes;
                 st.setText(hour + ":" + minutes + " " + timeSet);
             }
         }, hour,
