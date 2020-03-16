@@ -122,8 +122,7 @@ public class NotesListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
 
                 noteID =arr[i];
-                // noteID = idContainer.get(i);
-                System.out.println("qwerty i: "+i);
+                Log.d("qwerty i: ",i+"");
 
 
                 String Title = String.valueOf(dataSnapshot.child(noteID).child("Title").getValue());
