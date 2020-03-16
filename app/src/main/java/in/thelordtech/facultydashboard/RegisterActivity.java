@@ -144,7 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
                         } else {
                             progressDialog.dismiss();
                             Toast.makeText(RegisterActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            //   Toast.makeText(add_note_activity.this, "Error : "+fAuth.getCurrentUser(), Toast.LENGTH_SHORT).show();
+                      
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

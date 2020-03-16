@@ -27,13 +27,15 @@ import com.google.firebase.database.ServerValue;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.google.android.material.snackbar.Snackbar.*;
+
 public class AddNoteActivity extends AppCompatActivity {
 
     private EditText notesTitle;
     private EditText notesDescription;
     private FirebaseAuth fAuth;
     private DatabaseReference fnotesDataBase;
-    private Button closeADDnote;
+
     private  int checkforclick;
     ProgressDialog progressDialog;
 
@@ -47,11 +49,12 @@ public class AddNoteActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        notesTitle = (EditText) findViewById(R.id.video_title_edit_text);
-        notesDescription = (EditText) findViewById(R.id.description_edit_text);
+        notesTitle = findViewById(R.id.video_title_edit_text);
+        notesDescription =  findViewById(R.id.description_edit_text);
         Button savebtnn;
-        savebtnn = (Button)findViewById(R.id.saveee);
-        closeADDnote = (Button) findViewById(R.id.close_addnote_activity);
+        Button closeADDnote;
+        savebtnn = findViewById(R.id.saveee);
+        closeADDnote =  findViewById(R.id.close_addnote_activity);
 
         fAuth = FirebaseAuth.getInstance();
         fnotesDataBase = FirebaseDatabase.getInstance().getReference().child("Notes").child(fAuth.getCurrentUser().getUid());
@@ -69,12 +72,12 @@ public class AddNoteActivity extends AppCompatActivity {
                         createNotes();
                     }
                     else {
-                        Snackbar.make(view,"Please Connect to Internet",Snackbar.LENGTH_SHORT).show();
+                        make(view,"Please Connect to Internet", LENGTH_SHORT).show();
                     }
 
                 }
                 else{
-                    Snackbar.make(view,"Enter All Fields",Snackbar.LENGTH_SHORT).show();
+                    make(view,"Enter All Fields", LENGTH_SHORT).show();
                 }
 
             }
@@ -106,8 +109,6 @@ public class AddNoteActivity extends AppCompatActivity {
             progressDialog.setCancelable(false);
             progressDialog.show();
             try {
-                // FirebaseDatabase database = FirebaseDatabase.getInstance();
-                //String id = fnotesDataBase.push().getKey();
                 final DatabaseReference newNoteref = fnotesDataBase.push();
 
                 final Map notemap = new HashMap();
@@ -134,7 +135,6 @@ public class AddNoteActivity extends AppCompatActivity {
                                 } else {
                                     progressDialog.dismiss();
                                     Toast.makeText(AddNoteActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                    //   Toast.makeText(add_note_activity.this, "Error : "+fAuth.getCurrentUser(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -202,12 +202,7 @@ public class AddNoteActivity extends AppCompatActivity {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
-        if(networkInfo != null && networkInfo.isConnected()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return(networkInfo != null && networkInfo.isConnected());
     }
 
 }

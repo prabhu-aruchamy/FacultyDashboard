@@ -174,8 +174,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setNegativeButton(nBtn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //set what should happen when negative button is clicked
-                        //Toast.makeText(getApplicationContext(),"Later",Toast.LENGTH_LONG).show();
+                        Log.d("chosen","later");
                     }
                 }).show();
     }

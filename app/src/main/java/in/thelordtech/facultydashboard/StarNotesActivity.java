@@ -2,6 +2,7 @@ package in.thelordtech.facultydashboard;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,7 +72,6 @@ public class StarNotesActivity extends AppCompatActivity {
 
                 if (dataSnapshot.getChildrenCount() == 0) {
                     infoText.setVisibility(View.VISIBLE);
-                    //fav_list_view.setVisibility(View.GONE);
                 } else {
                     int i = 0;
                     int flag = 0;
@@ -81,7 +82,6 @@ public class StarNotesActivity extends AppCompatActivity {
                         if (isImportant.equals("1")) {
                             ImpNotes.add(String.valueOf(ds.child("Title").getValue()));
                             impID[i] = String.valueOf(ds.child("Noteid").getValue());
-                            //Toast.makeText(StarNotesActivity.this, impID[i], Toast.LENGTH_SHORT).show();
                             flag = 1;
                             i++;
                         }
@@ -111,7 +111,6 @@ public class StarNotesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 impNoteID = impID[position];
-                //Toast.makeText(StarNotesActivity.this, impNoteID, Toast.LENGTH_LONG).show();
 
                 iTitle = String.valueOf(DScopy.child(impNoteID).child("Title").getValue());
                 iContent = String.valueOf(DScopy.child(impNoteID).child("Content").getValue());
@@ -159,7 +158,7 @@ public class StarNotesActivity extends AppCompatActivity {
 
             case R.id.rem_fav_note:
                 RemoveNotesFromImportantList(impNoteID);
-
+                break;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -179,7 +178,6 @@ public class StarNotesActivity extends AppCompatActivity {
                 String shContent = String.valueOf(dataSnapshot.child(noteID).child("Content").getValue());
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                //sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shTitle + "\n" + shContent);
                 startActivity(Intent.createChooser(sharingIntent, " Share Using..."));
 
@@ -196,6 +194,7 @@ public class StarNotesActivity extends AppCompatActivity {
     private void RemoveNotesFromImportantList(String noteID) {
 
         impDataBaseReference.child(noteID).child("isImportant").setValue("0").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 

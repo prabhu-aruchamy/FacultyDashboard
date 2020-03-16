@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,7 +45,6 @@ public class NotesListActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private TextView content;
     private String arr[]=new String[500];
-    private TextView noteTime;
     String noteID;
     private  TextView indexImage;
     String shContent,shTitle = "";
@@ -74,7 +74,6 @@ public class NotesListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String count = String.valueOf(dataSnapshot.getChildrenCount());
-                //System.out.println("qwerty count: "+count);
                 int count1 = Integer.parseInt(count);
 
                 if (count1 == 0){
@@ -90,7 +89,7 @@ public class NotesListActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("ERROR!");
+                Log.d("error","ERROR!");
                 Toast.makeText(NotesListActivity.this, "Error: "+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
@@ -123,8 +122,7 @@ public class NotesListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
 
                 noteID =arr[i];
-                // noteID = idContainer.get(i);
-                System.out.println("qwerty i: "+i);
+                Log.d("qwerty i: ",i+"");
 
 
                 String Title = String.valueOf(dataSnapshot.child(noteID).child("Title").getValue());
@@ -211,12 +209,11 @@ public class NotesListActivity extends AppCompatActivity {
 
             case R.id.share_note:
                 ShareNotesInUsingOtherApps(noteID);
-                //Toast.makeText(this, "Share Note", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.fav_note:
                 AddNotetoImportantList(noteID);
-
+                break;
             default: return super.onContextItemSelected(item);
         }
         return super.onContextItemSelected(item);
@@ -225,6 +222,7 @@ public class NotesListActivity extends AppCompatActivity {
     private void AddNotetoImportantList(String noteID) {
 
         fnotesDataBaseReference.child(noteID).child("isImportant").setValue("1").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -237,29 +235,7 @@ public class NotesListActivity extends AppCompatActivity {
             }
         });
 
-//        impDBRef = FirebaseDatabase.getInstance().getReference("ImportantNotes").child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid());//goes upto
-//
-//
-//        final DatabaseReference favRef = impDBRef.push();
-//
-//        final Map notemap = new HashMap();
-//        notemap.put("Title", "title");
-//        notemap.put("Content", "notes");
-//        notemap.put("Noteid", favRef.getKey());
-//        notemap.put("timestamp", ServerValue.TIMESTAMP);
-//
-//        favRef.setValue(notemap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//
-//                if(task.isSuccessful()){
-//                    Toast.makeText(NotesListActivity.this, "Marked as Important!", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    Toast.makeText(NotesListActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
+
     }
 
 

@@ -67,8 +67,6 @@ public class ExistSchedule extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         fAuth = FirebaseAuth.getInstance();
-        //String key = database.getReference("Notes").getKey();
-        //fnotesDataBaseReference = database.getReference("Notes").child(key);
         fnotesDataBaseReference = database.getReference("Schedule").child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid());
         updateNote.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -145,7 +143,6 @@ public class ExistSchedule extends AppCompatActivity {
 
         int hour = fromTime.get(Calendar.HOUR_OF_DAY);
         int minute = fromTime.get(Calendar.MINUTE);
-//        System.out.println(df.format(calobj.getTime()));
         TimePickerDialog timePickerDialog = new TimePickerDialog(ExistSchedule.this, new TimePickerDialog.OnTimeSetListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -194,10 +191,6 @@ public class ExistSchedule extends AppCompatActivity {
                 fromTime.set(Calendar.HOUR_OF_DAY, hour);
                 fromTime.set(Calendar.MINUTE, min);
                 String timeSet = "";
-//                if(hour<10)
-//                    h = 0+""+hour;
-//                else
-//                    h = hour+"";
                 if (hour > 12) {
                     hour -= 12;
                     timeSet = "PM";
@@ -215,7 +208,6 @@ public class ExistSchedule extends AppCompatActivity {
                     minutes = "0" + min;
                 else
                     minutes = String.valueOf(min);
-//                mi = minutes;
                 st.setText(hour + ":" + minutes + " " + timeSet);
             }
         }, hour,

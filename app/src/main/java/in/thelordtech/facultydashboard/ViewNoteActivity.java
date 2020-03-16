@@ -55,11 +55,8 @@ public class ViewNoteActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         fAuth = FirebaseAuth.getInstance();
-        //String key = database.getReference("Notes").getKey();
-        //fnotesDataBaseReference = database.getReference("Notes").child(key);
         fnotesDataBaseReference = database.getReference("Notes").child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid());
 
-        //fnotesDataBaseReference = database.getReference("Notes").child(fAuth.getCurrentUser().getUid());//goes upto
 
 
         updateNote.setOnClickListener(new View.OnClickListener() {

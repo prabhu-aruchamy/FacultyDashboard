@@ -13,7 +13,6 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*import com.google.firebase.auth.FirebaseAuth;*/
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +30,7 @@ public class EditStudentDetails extends AppCompatActivity {
     ImageView ivstudentpic;
     EditText etmarks, etattendance;
     String studentname, studentid, courseid, totalclasses;
-    DatabaseReference mRef, fUID, studentID;
+    DatabaseReference mRef, fUID, studentIDref;
     int studentPic;
     FirebaseAuth fAuth;
 
@@ -58,8 +57,7 @@ public class EditStudentDetails extends AppCompatActivity {
         mRef = FirebaseDatabase.getInstance().getReference().child("courses");
         fAuth = FirebaseAuth.getInstance();
         fUID = mRef.child(fAuth.getCurrentUser().getUid());
-/*        fUID = mRef.child("id1");*/
-        studentID = fUID.child(courseid).child(studentid);
+        studentIDref = fUID.child(courseid).child(studentid);
 
         ivstudentpic.setImageResource(studentPic);
         tvname.setText(studentname);
@@ -105,8 +103,8 @@ public class EditStudentDetails extends AppCompatActivity {
 
         else
         {
-            studentID.child("marks").setValue(newMarks);
-            studentID.child("attendance").setValue(newAttendance);
+            studentIDref.child("marks").setValue(newMarks);
+            studentIDref.child("attendance").setValue(newAttendance);
             Toast.makeText(EditStudentDetails.this, "Changes saved", Toast.LENGTH_SHORT).show();
         }
 
