@@ -262,8 +262,7 @@ public class RequestAppointmentActivity extends AppCompatActivity {
                 String h, m;
                 h = tem.split(":")[0];
                 m = tem.split(":")[1];
-                if(nowsess.equals("PM")){
-                    if(Integer.parseInt(h)<12)
+                if(nowsess.equals("PM") &&Integer.parseInt(h)<12){
                         h = String.valueOf(Integer.parseInt(h)+12);
                 }
                 int nowtime = Integer.parseInt(h+m);
