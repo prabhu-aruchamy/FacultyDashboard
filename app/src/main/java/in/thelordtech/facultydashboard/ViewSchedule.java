@@ -77,10 +77,7 @@ public class ViewSchedule extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Toast.makeText(this, "User: "+ Objects.requireNonNull(fAuth.getCurrentUser()).getDisplayName(), Toast.LENGTH_SHORT).show();
         }
-        //String key = database.getReference("Notes").getKey();
-        //fnotesDataBaseReference = database.getReference("Notes").child(key);
         fnotesDataBaseReference = database.getReference("Schedule").child(fAuth.getCurrentUser().getUid());//goes upto
-        //final String keyy =  fnotesDataBaseReference.getKey();
 
         fnotesDataBaseReference.addValueEventListener(new ValueEventListener() { //error line
             @Override
@@ -174,15 +171,7 @@ public class ViewSchedule extends AppCompatActivity {
             for (Long lo:inpu) {
                 DataSnapshot ds = input.get(lo);
 
-//                Log.d("elei",ob+"");
-//                DataSnapshot ds = input.get(ob);
                 inp = new HashMap<String, String>();
-//               int sor =Integer.parseInt(ds.child("Sort").getValue().toString());
-//                Long tor = Integer.parseInt(t.trim());
-//                Log.d("Sort",sor+"");
-//
-
-//              if(Integer.parseInt(ds.child("Sort").getValue().toString())>=Integer.parseInt(t)){
                 String temp = ds.child("Date").getValue() + " " + ds.child("Time").getValue() + " - " + ds.child("EndTime").getValue();
                 inp.put("Title", String.valueOf(ds.child("Content").getValue()));
                 String so = String.valueOf(ds.child("Sort").getValue());
@@ -211,7 +200,6 @@ public class ViewSchedule extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
 
                 noteID =arr[i];
-                // noteID = idContainer.get(i);
                 System.out.println("qwerty i: "+i);
 
 
@@ -220,7 +208,6 @@ public class ViewSchedule extends AppCompatActivity {
                 String et = String.valueOf(dataSnapshot.child(noteID).child("EndTime").getValue());
                 String content = String.valueOf(dataSnapshot.child(noteID).child("Content").getValue());
 
-                //Toast.makeText(DescriptionMaker.this, ""+noteID, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(),ExistSchedule.class);
                 intent.putExtra("datet",d);
                 intent.putExtra("st",st);
@@ -280,43 +267,7 @@ public class ViewSchedule extends AppCompatActivity {
         }
     }
 
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.add_new_notes, menu);
-//        return true;
-//    }
-//
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item){
-//
-//        switch (item.getItemId()){
-//
-//            case R.id.addnotes:
-//                Intent noteintent = new Intent(getApplicationContext(),RequestAppointmentActivity.class);
-//                startActivity(noteintent);
-//                break;
-//
-//            case R.id.refreshh:
-//                if(isOnline()){
-//                    Intent refreshintent = new Intent(getApplicationContext(),ViewSchedule.class);
-//                    startActivity(refreshintent);
-//                    finish();
-//                }
-//                else {
-//                    Toast.makeText(getApplicationContext(), "Please Connect to Internet", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                break;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//
-//        }
-//        return super.onOptionsItemSelected(item);
-//
-//    }
-//
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
