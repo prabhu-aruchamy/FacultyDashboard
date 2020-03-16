@@ -69,7 +69,6 @@ public class FacultyProfileActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         final String userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
-        //Toast.makeText(this, userID, Toast.LENGTH_SHORT).show();
         facultyDBref = FirebaseDatabase.getInstance().getReference("userProfile");
         facultyName.setText(Objects.requireNonNull(fAuth.getCurrentUser()).getDisplayName());
         facultyEmail.setText(Objects.requireNonNull(fAuth.getCurrentUser()).getEmail());
@@ -90,7 +89,6 @@ public class FacultyProfileActivity extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         }else {
-                            //Toast.makeText(FacultyProfileActivity.this, ds.toString(), Toast.LENGTH_SHORT).show();
                             UI_Container.setVisibility(View.VISIBLE);
                             phoneNumber = String.valueOf(ds.child("ContactNumber").getValue());
                             facultyBIO = String.valueOf(ds.child("Bio").getValue());
@@ -162,7 +160,6 @@ public class FacultyProfileActivity extends AppCompatActivity {
                 i.putExtra("ResumeLink",resumeDownloadLink);
                 i.putExtra("IconURL",facultyIconURL);
                 startActivity(i);
-                //OpenGalleryToPickImage();
             }
         });
     }
