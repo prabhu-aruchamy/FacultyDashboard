@@ -209,7 +209,6 @@ public class NotesListActivity extends AppCompatActivity {
 
             case R.id.share_note:
                 ShareNotesInUsingOtherApps(noteID);
-                //Toast.makeText(this, "Share Note", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.fav_note:
@@ -236,29 +235,7 @@ public class NotesListActivity extends AppCompatActivity {
             }
         });
 
-//        impDBRef = FirebaseDatabase.getInstance().getReference("ImportantNotes").child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid());//goes upto
-//
-//
-//        final DatabaseReference favRef = impDBRef.push();
-//
-//        final Map notemap = new HashMap();
-//        notemap.put("Title", "title");
-//        notemap.put("Content", "notes");
-//        notemap.put("Noteid", favRef.getKey());
-//        notemap.put("timestamp", ServerValue.TIMESTAMP);
-//
-//        favRef.setValue(notemap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//
-//                if(task.isSuccessful()){
-//                    Toast.makeText(NotesListActivity.this, "Marked as Important!", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    Toast.makeText(NotesListActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
+
     }
 
 
