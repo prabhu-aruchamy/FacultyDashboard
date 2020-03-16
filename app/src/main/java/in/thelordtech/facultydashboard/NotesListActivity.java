@@ -45,7 +45,6 @@ public class NotesListActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private TextView content;
     private String arr[]=new String[500];
-    private TextView noteTime;
     String noteID;
     private  TextView indexImage;
     String shContent,shTitle = "";
@@ -75,7 +74,6 @@ public class NotesListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String count = String.valueOf(dataSnapshot.getChildrenCount());
-                //System.out.println("qwerty count: "+count);
                 int count1 = Integer.parseInt(count);
 
                 if (count1 == 0){
@@ -91,7 +89,7 @@ public class NotesListActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("ERROR!");
+                Log.d("error","ERROR!");
                 Toast.makeText(NotesListActivity.this, "Error: "+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
