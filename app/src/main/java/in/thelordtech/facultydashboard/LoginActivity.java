@@ -97,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                                 .putString("email",userEmail)
                                 .putString("password",Password)
                                 .apply();
-                        //mFirebaseAnalytics.setUserProperty("UserData", userEmail+" : "+Password);
                         openHome();
                     }else{
                         FirebaseAuth.getInstance().signOut();
