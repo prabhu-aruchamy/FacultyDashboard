@@ -64,17 +64,13 @@ public class History extends AppCompatActivity {
         progressDialog.show();
 
         notesList = (ListView) findViewById(R.id.notes_hist_view);
-        //noteTime = (TextView)findViewById(R.id.noteDATE);
-        // content = (TextView)findViewById(R.id.adapterid1);
         database = FirebaseDatabase.getInstance();
         fAuth = FirebaseAuth.getInstance();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Toast.makeText(this, "User: "+ Objects.requireNonNull(fAuth.getCurrentUser()).getDisplayName(), Toast.LENGTH_SHORT).show();
         }
-        //String key = database.getReference("Notes").getKey();
-        //fnotesDataBaseReference = database.getReference("Notes").child(key);
         fnotesDataBaseReference = database.getReference("Schedule").child(fAuth.getCurrentUser().getUid());//goes upto
-        //final String keyy =  fnotesDataBaseReference.getKey();
+
 
         fnotesDataBaseReference.addValueEventListener(new ValueEventListener() { //error line
             @Override
