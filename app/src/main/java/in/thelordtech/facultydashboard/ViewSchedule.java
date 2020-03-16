@@ -134,7 +134,6 @@ public class ViewSchedule extends AppCompatActivity {
 
     public void Load(final DataSnapshot dataSnapshot){
         Calendar calobj = Calendar.getInstance();
-        Date da = new Date();
         y = calobj.get(Calendar.YEAR)+"";
         int tem;
         Long tor;
