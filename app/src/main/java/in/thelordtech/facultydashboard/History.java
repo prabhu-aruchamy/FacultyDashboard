@@ -77,7 +77,7 @@ public class History extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String count = String.valueOf(dataSnapshot.getChildrenCount());
-                System.out.println("qwerty count: "+count);
+                Log.d("qwerty count: ",count);
                 int count1 = Integer.parseInt(count);
 
                 if (count1 == 0){
@@ -91,7 +91,7 @@ public class History extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("ERROR!");
+                Log.d("err","ERROR!");
                 Toast.makeText(getApplicationContext(), "Error: "+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
@@ -116,7 +116,6 @@ public class History extends AppCompatActivity {
 
     public void Load(final DataSnapshot dataSnapshot){
         Calendar calobj = Calendar.getInstance();
-        Date da = new Date();
         y = calobj.get(Calendar.YEAR)+"";
         int tem;
         Long tor;
@@ -181,7 +180,6 @@ public class History extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 noteID = arr[i];
-                //noteID = idContainer.get(i);
                 registerForContextMenu(adapterView);
                 return false;
             }
