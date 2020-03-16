@@ -1,27 +1,18 @@
 package in.thelordtech.facultydashboard;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EditStudentDetails extends AppCompatActivity {
 
@@ -76,7 +67,7 @@ public class EditStudentDetails extends AppCompatActivity {
     private void updateDetails(String newMarks, String newAttendance)
     {
 
-        if (newMarks.isEmpty() || newAttendance.isEmpty())
+        if (emptyFields(newMarks, newAttendance))
         {
             Toast.makeText(EditStudentDetails.this
                     , "Fill in both the details", Toast.LENGTH_SHORT).show();
@@ -88,7 +79,7 @@ public class EditStudentDetails extends AppCompatActivity {
                     , "Fill Numeric Values", Toast.LENGTH_SHORT).show();
         }
 
-        else if( ( Integer.parseInt(newMarks ) > 100) || (Integer.parseInt(newMarks ) < 0) )
+        else if( ( invalidMarks(newMarks)) )
         {
             Toast.makeText(EditStudentDetails.this
                     , "Invalid marks", Toast.LENGTH_SHORT).show();
@@ -126,6 +117,16 @@ public class EditStudentDetails extends AppCompatActivity {
             return false;
         }
 
+    }
+
+    public boolean invalidMarks(String newMarks)
+    {
+        return ( Integer.parseInt(newMarks ) > 100) || (Integer.parseInt(newMarks ) < 0);
+    }
+
+    public boolean emptyFields(String newMarks, String newAttendance)
+    {
+        return ( newMarks.isEmpty() || newAttendance.isEmpty() );
     }
 
 

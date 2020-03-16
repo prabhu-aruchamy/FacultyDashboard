@@ -1,10 +1,5 @@
 package in.thelordtech.facultydashboard;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,10 +15,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -149,17 +147,17 @@ public class CourseDetails extends AppCompatActivity {
         studentPic.put("stid7", R.drawable.student7);
         studentPic.put("stid8", R.drawable.student8);
         studentPic.put("stid9", R.drawable.student9);
-        studentPic.put("stid10", R.drawable.student9);
-        studentPic.put("stid11", R.drawable.student9);
-        studentPic.put("stid12", R.drawable.student9);
-        studentPic.put("stid13", R.drawable.student9);
-        studentPic.put("stid14", R.drawable.student9);
-        studentPic.put("stid15", R.drawable.student9);
-        studentPic.put("stid16", R.drawable.student9);
-        studentPic.put("stid17", R.drawable.student9);
-        studentPic.put("stid18", R.drawable.student9);
-        studentPic.put("stid19", R.drawable.student9);
-        studentPic.put("stid20", R.drawable.student9);
+        studentPic.put("stid10", R.drawable.student10);
+        studentPic.put("stid11", R.drawable.student11);
+        studentPic.put("stid12", R.drawable.student12);
+        studentPic.put("stid13", R.drawable.student13);
+        studentPic.put("stid14", R.drawable.student14);
+        studentPic.put("stid15", R.drawable.student15);
+        studentPic.put("stid16", R.drawable.student16);
+        studentPic.put("stid17", R.drawable.student17);
+        studentPic.put("stid18", R.drawable.student18);
+        studentPic.put("stid19", R.drawable.student19);
+        studentPic.put("stid20", R.drawable.student20);
 
         progressDialog = new ProgressDialog(CourseDetails.this);
         progressDialog.setCancelable(false);

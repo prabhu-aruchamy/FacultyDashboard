@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -63,9 +64,8 @@ public class NotesListActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         fAuth = FirebaseAuth.getInstance();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Toast.makeText(this, "User: "+ Objects.requireNonNull(fAuth.getCurrentUser()).getDisplayName(), Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(this, "User: "+ Objects.requireNonNull(fAuth.getCurrentUser()).getDisplayName(), Toast.LENGTH_SHORT).show();
+
 
         fnotesDataBaseReference = database.getReference("Notes").child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid());//goes upto
         adapter = new ArrayAdapter<String>(this,R.layout.task_list_row,R.id.noteTitleFB,NotesTitle);
@@ -104,9 +104,14 @@ public class NotesListActivity extends AppCompatActivity {
             int i = 0;
             for (DataSnapshot ds: dataSnapshot.getChildren())
             {
-                NotesTitle.add(String.valueOf(ds.child("Title").getValue()));
-                arr[i]=String.valueOf(ds.child("Noteid").getValue());
-                i++;
+                String isImportant = String.valueOf(ds.child("isHidden").getValue());
+
+                if(isImportant.equals("0")){
+                    NotesTitle.add(String.valueOf(ds.child("Title").getValue()));
+                    arr[i]=String.valueOf(ds.child("Noteid").getValue());
+                    i++;
+                }
+
             }
             progressDialog.dismiss();
 
@@ -214,9 +219,28 @@ public class NotesListActivity extends AppCompatActivity {
             case R.id.fav_note:
                 AddNotetoImportantList(noteID);
                 break;
+
+            case R.id.hide_note:
+                HideNote(noteID);
             default: return super.onContextItemSelected(item);
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void HideNote(String noteID) {
+        fnotesDataBaseReference.child(noteID).child("isHidden").setValue("1").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()){
+                    Toast.makeText(NotesListActivity.this, "Note Hidden!", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(NotesListActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     private void AddNotetoImportantList(String noteID) {

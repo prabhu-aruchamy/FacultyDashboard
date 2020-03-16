@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,10 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     DatabaseReference updateRef;
     String whatsNew = "";
+    int VolumeUpCounter = 0;
+    int VolumeDownCounter = 0;
+    int PasswordSum = 8;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,8 @@ public class HomeActivity extends AppCompatActivity {
 //                .setGitHubUserAndRepo("thelordtech", "FacultyDashboard");
 //        appUpdater.start();
         checkUpdates();
+
+
     }
 
     @Override
@@ -176,4 +183,34 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }).show();
     }
+
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+            if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+                VolumeDownCounter = VolumeDownCounter + 1;
+                PasswordSum = PasswordSum - 1;
+                //Toast.makeText(this, "Down Count: "+VolumeDownCounter, Toast.LENGTH_SHORT).show();
+                checkForCorrectPassword();
+                return true;
+            }else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+                //Toast.makeText(this, "Up Pressed: "+VolumeUpCounter, Toast.LENGTH_SHORT).show();
+                checkForCorrectPassword();
+                VolumeUpCounter = VolumeUpCounter + 1;
+                return true;
+            }else {
+                return super.onKeyDown(keyCode, event);
+            }
+        }
+
+    private void checkForCorrectPassword() {
+
+        if(VolumeUpCounter == 3 && VolumeDownCounter == 5){
+            VolumeUpCounter = 0;
+            VolumeDownCounter = 0;
+            Intent i = new Intent(HomeActivity.this, hiddenNotesActivity.class);
+            startActivity(i);
+        }
+    }
 }
+

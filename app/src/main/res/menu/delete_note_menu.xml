@@ -11,6 +11,10 @@
         android:title="Add to Important"/>
 
     <item
+        android:id="@+id/hide_note"
+        android:title="Hide"/>
+
+    <item
         android:id="@+id/delete_menu"
         android:icon="@drawable/delete_icon_menu"
         android:title="Delete" />
