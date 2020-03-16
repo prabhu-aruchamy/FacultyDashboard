@@ -145,7 +145,7 @@ public class FacultyProfileActivity extends AppCompatActivity {
         facultyNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OpenPhoneApp(facultyNumber.getText().toString());
+                //OpenPhoneApp(facultyNumber.getText().toString());
             }
         });
 

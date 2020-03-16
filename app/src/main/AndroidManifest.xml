@@ -11,11 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".hiddenNotesActivity"></activity>
+        <activity android:name=".hiddenNotesActivity"
+            android:label="Hidden Notes"
+            android:parentActivityName=".HomeActivity">
+        </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity">
+        </activity>
         <activity android:name=".View_Profile_Activity" />
         <activity
             android:name=".FacultyListActivity"
@@ -29,11 +33,23 @@
             android:name=".StarNotesActivity"
             android:label="Important Notes"
             android:parentActivityName=".HomeActivity" />
-        <activity android:name=".Mark_Attendance" />
-        <activity android:name=".EditStudentDetails" />
+        <activity android:name=".Mark_Attendance"
+            android:label="Mark Attendence">
+
+        </activity>
+        <activity android:name=".EditStudentDetails"
+            android:label="Edit Details">
+        </activity>
         <activity android:name=".ViewStudentDetails" />
-        <activity android:name=".CourseDetails" />
-        <activity android:name=".CourseListActivity" />
+        <activity android:name=".CourseDetails"
+            android:label="Students List"
+            android:parentActivityName=".CourseListActivity">
+        </activity>
+        <activity android:name=".CourseListActivity"
+            android:label="Course Details"
+            android:parentActivityName=".HomeActivity">
+
+        </activity>
         <activity android:name=".History" />
         <activity android:name=".ExistSchedule" />
         <activity android:name=".ViewSchedule" />

@@ -2,6 +2,7 @@ package in.thelordtech.facultydashboard;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -39,6 +41,11 @@ public class HomeActivity extends AppCompatActivity {
     int VolumeUpCounter = 0;
     int VolumeDownCounter = 0;
     int PasswordSum = 8;
+    SharedPreferences preferences;
+    String uservolumeUPCount, uservolumeDOWNCount;
+
+
+
 
 
     @Override
@@ -73,7 +80,14 @@ public class HomeActivity extends AppCompatActivity {
 //                .setDisplay(Display.DIALOG)
 //                .setUpdateFrom(UpdateFrom.GITHUB)
 //                .setGitHubUserAndRepo("thelordtech", "FacultyDashboard");
+
 //        appUpdater.start();
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
+
+        uservolumeUPCount = preferences.getString("VolumeUpCount", "3");
+        uservolumeDOWNCount = preferences.getString("VolumeDownCount", "5");
+
         checkUpdates();
 
 
@@ -205,7 +219,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void checkForCorrectPassword() {
 
-        if(VolumeUpCounter == 3 && VolumeDownCounter == 5){
+        if(VolumeUpCounter == Integer.parseInt(uservolumeUPCount) && VolumeDownCounter == Integer.parseInt(uservolumeDOWNCount)){
             VolumeUpCounter = 0;
             VolumeDownCounter = 0;
             Intent i = new Intent(HomeActivity.this, hiddenNotesActivity.class);
