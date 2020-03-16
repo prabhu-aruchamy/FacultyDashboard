@@ -60,7 +60,6 @@ public class RequestAppointmentActivity extends AppCompatActivity {
     String con;
     String t,h,mi,d,m,y;
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
-    private final static String default_notification_channel_id = "default" ;
     String dat, tim, etim;
     final Calendar myCalendar = Calendar. getInstance () ;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -111,7 +110,6 @@ public class RequestAppointmentActivity extends AppCompatActivity {
     public void setFromTime(View view) {
         int hour = fromTime.get(Calendar.HOUR_OF_DAY);
         int minute = fromTime.get(Calendar.MINUTE);
-//        System.out.println(df.format(calobj.getTime()));
         TimePickerDialog timePickerDialog = new TimePickerDialog(RequestAppointmentActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -161,10 +159,6 @@ public class RequestAppointmentActivity extends AppCompatActivity {
                 fromTime.set(Calendar.HOUR_OF_DAY, hour);
                 fromTime.set(Calendar.MINUTE, min);
                 String timeSet = "";
-//                if(hour<10)
-//                    h = 0+""+hour;
-//                else
-//                    h = hour+"";
                 if (hour > 12) {
                     hour -= 12;
                     timeSet = "PM";
@@ -182,7 +176,6 @@ public class RequestAppointmentActivity extends AppCompatActivity {
                     minutes = "0" + min;
                 else
                     minutes = String.valueOf(min);
-//                mi = minutes;
                 finEditText.setText(hour + ":" + minutes + " " + timeSet);
             }
         }, hour,
@@ -229,8 +222,6 @@ public class RequestAppointmentActivity extends AppCompatActivity {
             progressDialog.setCancelable(false);
             progressDialog.show();
             try {
-                // FirebaseDatabase database = FirebaseDatabase.getInstance();
-                //String id = fnotesDataBase.push().getKey();
                 final DatabaseReference newNoteref = fnotesDataBase.push();
                 String eh,em, sh,sm,fs,ts;
                 ts = etim.split(" ")[1];
@@ -307,13 +298,8 @@ public class RequestAppointmentActivity extends AppCompatActivity {
                         String date = String.valueOf(ds.child("Date").getValue());
                         if(dat.equals(date)&&(nowtime>=start&&nowtime<=endt)) {
                             Log.d("maatikichi","clash");
-//                            Toast.makeText(getApplicationContext(), start+" "+endt+" "+nowtime+" Yes", Toast.LENGTH_SHORT).show();
                             flag = false;
                             break;
-                        }
-                        else{
-//                            Toast.makeText(getApplicationContext(), start+" "+endt+" "+nowtime+" NO", Toast.LENGTH_SHORT).show();
-
                         }
                     }
                 }
@@ -349,7 +335,6 @@ public class RequestAppointmentActivity extends AppCompatActivity {
                                     } else {
                                         progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                        //   Toast.makeText(add_note_activity.this, "Error : "+fAuth.getCurrentUser(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
